@@ -1221,32 +1221,32 @@ header.ribbon {
         text-align: center;
     }
 
-    /* Drag grips sit on the boundary between two header cells. They own the resize cursor so
+        /* Drag grips sit on the boundary between two header cells. They own the resize cursor so
        the surrounding header keeps its add row / add column affordance. */
-    .inputGrid th .colResizeGrip {
-        position: absolute;
-        top: 0;
-        right: -3px;
-        width: 7px;
-        height: 100%;
-        cursor: col-resize;
-        z-index: 3;
-    }
+        .inputGrid th .colResizeGrip {
+            position: absolute;
+            top: 0;
+            right: -3px;
+            width: 7px;
+            height: 100%;
+            cursor: col-resize;
+            z-index: 3;
+        }
 
-    .inputGrid th .rowResizeGrip {
-        position: absolute;
-        left: 0;
-        bottom: -3px;
-        width: 100%;
-        height: 7px;
-        cursor: row-resize;
-        z-index: 3;
-    }
+        .inputGrid th .rowResizeGrip {
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 7px;
+            cursor: row-resize;
+            z-index: 3;
+        }
 
-    .inputGrid th .colResizeGrip:hover,
-    .inputGrid th .rowResizeGrip:hover {
-        background: rgba(37, 99, 216, .35);
-    }
+            .inputGrid th .colResizeGrip:hover,
+            .inputGrid th .rowResizeGrip:hover {
+                background: rgba(37, 99, 216, .35);
+            }
 
     .inputGrid col.gridRowHeaderCol {
         width: 34px;
@@ -2956,7 +2956,8 @@ header.ribbon {
     .automaticEquationHeader p {
         margin: 0;
         color: #52607a;
-        font: 11px/1.45 Segoe UI, Arial, sans-serif;
+        font-size: 11px;
+        line-height: 1.45;
     }
 
 .automaticEquationSteps {
@@ -5181,22 +5182,22 @@ body.fileTabReordering, body.fileTabReordering * {
     overflow-x: hidden !important; /* Hides horizontal scrollbar when auto-wrap is active */
 }
 
-    /* When Auto-Wrap and Auto-Page work together the chunk is already sized to the
+/* When Auto-Wrap and Auto-Page work together the chunk is already sized to the
        measured rows, so the frame must not clip or scroll them away. */
-    .tableBlock.autoWrapTable.autoExtendTable .matrixFrame,
-    .tableBlock.autoWrapTable.isTableChunk .matrixFrame {
-        max-height: none !important;
-        height: auto !important;
-        overflow-y: visible !important;
-    }
+.tableBlock.autoWrapTable.autoExtendTable .matrixFrame,
+.tableBlock.autoWrapTable.isTableChunk .matrixFrame {
+    max-height: none !important;
+    height: auto !important;
+    overflow-y: visible !important;
+}
 
-    /* Same for the editable grid used by display tables. */
-    .tableBlock.autoWrapTable .gridEditor.autoWrapGrid .gridScroll,
-    .tableBlock.autoWrapTable .preview .gridEditor.autoWrapGrid .gridScroll {
-        max-height: none !important;
-        height: auto !important;
-        overflow-y: visible !important;
-    }
+/* Same for the editable grid used by display tables. */
+.tableBlock.autoWrapTable .gridEditor.autoWrapGrid .gridScroll,
+.tableBlock.autoWrapTable .preview .gridEditor.autoWrapGrid .gridScroll {
+    max-height: none !important;
+    height: auto !important;
+    overflow-y: visible !important;
+}
 
 .tableBlock.autoWrapTable .matrixTable,
 .matrixTable.autoWrapTable {
@@ -5370,6 +5371,1201 @@ body.fileTabReordering, body.fileTabReordering * {
 .matrixFrame.noBrackets::after {
     display: none !important;
     content: none !important;
+}
+
+.tsdProgressClose {
+    background: none;
+    border: none;
+    color: #9db8e6;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 2px;
+    margin-left: 4px;
+    flex: 0 0 auto;
+    transition: color .15s ease;
+}
+
+    .tsdProgressClose:hover {
+        color: #ffffff;
+    }
+
+/* ==========================================================================
+   MODERN WEB LOOK: SHEET REVISION DIFFING
+   ========================================================================== */
+.diffModalModern {
+    width: 92vw !important;
+    max-width: 1350px !important;
+    height: 88vh !important;
+    z-index: 5000 !important;
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border: 1px solid #334155 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
+    overflow: hidden;
+}
+
+.diffHeader {
+    background: #1e293b;
+    padding: 12px 18px;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.diffHeaderTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.diffLogoIcon {
+    width: 36px;
+    height: 36px;
+    background: #2563d8;
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.diffHeaderTitle h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.diffHeaderTitle p {
+    margin: 2px 0 0;
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.diffCloseBtn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+    .diffCloseBtn:hover {
+        color: #f8fafc;
+    }
+
+.diffModalBody {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    gap: 12px;
+}
+
+/* Quick Presets Bar */
+.diffPresetBar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #1e293b;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+.diffPresetLabel {
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-right: 4px;
+}
+
+.diffPresetBtn {
+    background: #0f172a;
+    color: #cbd5e1;
+    border: 1px solid #334155;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+    .diffPresetBtn:hover {
+        background: #334155;
+        color: #fff;
+    }
+
+    .diffPresetBtn.active {
+        background: #2563d8;
+        color: #fff;
+        border-color: #3b82f6;
+    }
+
+/* Toolbar & Slot Selectors */
+.diffToolbarModern {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1e293b;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+.diffSlotBox {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.diffSlotBadge {
+    font-size: 9px;
+    font-weight: 800;
+    padding: 3px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+    .diffSlotBadge.red {
+        background: #7f1d1d;
+        color: #fecdd3;
+    }
+
+    .diffSlotBadge.green {
+        background: #14532d;
+        color: #bbf7d0;
+    }
+
+.diffSlotBox select {
+    flex: 1;
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid #475569;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+}
+
+/* Stats Chips & Segmented Controls */
+.diffStatsAndFilters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.diffStatChips {
+    display: flex;
+    gap: 6px;
+}
+
+.diffChip {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+}
+
+    .diffChip.total {
+        background: #1e293b;
+        color: #38bdf8;
+        border-color: #0284c7;
+    }
+
+    .diffChip.added {
+        background: #064e3b;
+        color: #4ade80;
+        border-color: #059669;
+    }
+
+    .diffChip.modified {
+        background: #451a03;
+        color: #fbbf24;
+        border-color: #d97706;
+    }
+
+    .diffChip.removed {
+        background: #450a0a;
+        color: #f87171;
+        border-color: #dc2626;
+    }
+
+.diffSegmentedControl {
+    display: flex;
+    background: #1e293b;
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+.diffSegBtn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+    .diffSegBtn.active {
+        background: #0f172a;
+        color: #38bdf8;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+.diffViewToggleBtn {
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #334155;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .diffViewToggleBtn:hover {
+        background: #334155;
+    }
+
+/* Dual Viewports & Humanized Diff Cards */
+.diffViewportContainer {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+}
+
+.diffViewport {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.diffViewportHeader {
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .diffViewportHeader.revA {
+        background: #2a1215;
+        color: #f87171;
+        border-bottom: 1px solid #7f1d1d;
+    }
+
+    .diffViewportHeader.revB {
+        background: #0b291a;
+        color: #4ade80;
+        border-bottom: 1px solid #14532d;
+    }
+
+.diffViewportContent {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Human-Readable Diff Cards */
+.diffCardModern {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+    .diffCardModern.added {
+        border-left: 4px solid #22c55e;
+    }
+
+    .diffCardModern.removed {
+        border-left: 4px solid #ef4444;
+    }
+
+    .diffCardModern.modified {
+        border-left: 4px solid #f59e0b;
+    }
+
+.diffCardMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #cbd5e1;
+}
+
+.diffHumanSentence {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #e2e8f0;
+}
+
+.diffPillOld {
+    background: #450a0a;
+    color: #fca5a5;
+    border: 1px solid #7f1d1d;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    text-decoration: line-through;
+}
+
+.diffPillNew {
+    background: #052e16;
+    color: #86efac;
+    border: 1px solid #14532d;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: Consolas, monospace;
+    font-size: 11px;
+}
+
+.diffArrow {
+    color: #94a3b8;
+    margin: 0 4px;
+    font-size: 11px;
+}
+
+/* Viewport Container Display Modes */
+.diffViewportContainer.side-by-side #diffViewportA,
+.diffViewportContainer.side-by-side #diffViewportB {
+    display: flex !important;
+}
+
+.diffViewportContainer.side-by-side #diffViewportUnified {
+    display: none !important;
+}
+
+.diffViewportContainer.unified-mode #diffViewportA,
+.diffViewportContainer.unified-mode #diffViewportB {
+    display: none !important;
+}
+
+.diffViewportContainer.unified-mode #diffViewportUnified {
+    display: flex !important;
+    flex: 1;
+}
+
+.diffViewportHeader.unified {
+    background: #0f172a;
+    color: #38bdf8;
+    border-bottom: 1px solid #0284c7;
+}
+
+.ribbonGroup.quickCalc {
+    display: none !important;
+}
+
+/* Shrink collapsed Sample Canvas select box in Insert tab */
+.ribbonGroup select[onchange*="addSample"] {
+    width: 130px !important;
+    max-width: 130px !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   MODERN SaaS WEB-STYLE RIBBON TOOLBAR & BUTTONS
+   ========================================================================== */
+
+/* 1. Quick Access Toolbar Buttons (Top Bar) */
+.quickAccessToolbar button {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 6px !important;
+    color: #e2e8f0 !important;
+    font-size: 13px !important;
+    padding: 5px 8px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+    .quickAccessToolbar button:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        color: #ffffff !important;
+        border-color: rgba(255, 255, 255, 0.35) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .quickAccessToolbar button:active {
+        transform: translateY(0);
+        background: rgba(255, 255, 255, 0.12) !important;
+        box-shadow: none;
+    }
+
+/* 2. Ribbon Tab Navigation */
+.ribbonTab {
+    min-width: 76px !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    border-radius: 6px 6px 0 0 !important;
+    background: transparent !important;
+    padding: 8px 16px 7px !important;
+    color: #cbd5e1 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease-in-out !important;
+}
+
+    .ribbonTab:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+        color: #f8fafc !important;
+    }
+
+    .ribbonTab[aria-selected="true"] {
+        background: #f8fafc !important;
+        color: #1e293b !important;
+        border-bottom: 2px solid #2563d8 !important;
+        font-weight: 700 !important;
+        box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+/* 3. Standard Ribbon Group Buttons */
+.ribbonGroup button {
+    height: 30px !important;
+    min-height: 30px !important;
+    padding: 0 12px !important;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 6px !important;
+    color: #334155 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+    .ribbonGroup button:hover {
+        background: #f8fafc !important;
+        border-color: #94a3b8 !important;
+        color: #0f172a !important;
+        box-shadow: 0 2px 5px rgba(15, 23, 42, 0.08) !important;
+        transform: translateY(-1px);
+    }
+
+    .ribbonGroup button:active {
+        background: #e2e8f0 !important;
+        transform: translateY(0);
+        box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    .ribbonGroup button:focus-visible {
+        outline: 2px solid #2563d8 !important;
+        outline-offset: 1px !important;
+    }
+
+    /* 4. Primary & Action Accent Buttons inside Ribbon */
+    .ribbonGroup button[style*="color: #2563d8"],
+    .ribbonGroup button[style*="color:#2563d8"],
+    .ribbonGroup button[style*="font-weight: bold"],
+    .ribbonGroup button[style*="font-weight:bold"] {
+        background: #eff6ff !important;
+        border-color: #bfdbfe !important;
+        color: #1d4ed8 !important;
+    }
+
+        .ribbonGroup button[style*="color: #2563d8"]:hover,
+        .ribbonGroup button[style*="color:#2563d8"]:hover {
+            background: #dbeafe !important;
+            border-color: #93c5fd !important;
+            color: #1e40af !important;
+        }
+
+/* 5. Split Dropdown Buttons (e.g., TSD Refresh Buttons) */
+/* ==========================================================================
+   ENHANCED TSD REFRESH MENU DROPDOWN (DE-CONGESTED & SPACIOUS)
+   ========================================================================== */
+
+/* Split button container */
+.tsdSplitBtn {
+    position: relative;
+    display: inline-flex;
+}
+
+    .tsdSplitBtn > button:first-child {
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+
+.tsdSplitToggle {
+    padding: 0 8px !important;
+    margin-left: -1px;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    font-size: 11px !important;
+}
+
+/* Floating Dropdown Container */
+.tsdRefreshMenu {
+    display: none;
+    position: fixed;
+    z-index: 9500;
+    margin-top: 4px;
+    min-width: 330px; /* Expanded width for breathing room */
+    max-width: 380px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px -3px rgba(15, 23, 42, 0.18), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
+    padding: 6px;
+}
+
+    .tsdRefreshMenu.open {
+        display: flex;
+        flex-direction: column;
+        gap: 4px; /* Space between option buttons */
+    }
+
+    /* Individual Option Item Button */
+    .tsdRefreshMenu button {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important; /* Vertical gap between title and hint */
+        width: 100% !important;
+        height: auto !important; /* Allow natural expansion */
+        min-height: auto !important;
+        text-align: left !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: 7px !important;
+        padding: 10px 12px !important; /* De-congested inner padding */
+        cursor: pointer !important;
+        transition: all 0.15s ease-in-out !important;
+        box-shadow: none !important;
+    }
+
+        /* Hover and Focus States */
+        .tsdRefreshMenu button:hover {
+            background: #f0f9ff !important; /* Soft sky-blue tint */
+            border-color: #bae6fd !important;
+            transform: none !important; /* Prevent ribbon lift effect inside menus */
+        }
+
+        .tsdRefreshMenu button:active {
+            background: #e0f2fe !important;
+        }
+
+/* Option Title */
+.tsdMenuTitle {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 13px;
+    line-height: 1.25;
+}
+
+.tsdRefreshMenu button:hover .tsdMenuTitle {
+    color: #0284c7; /* Highlight title on hover */
+}
+
+/* Option Sub-text / Hint Description */
+.tsdMenuHint {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 11.5px;
+    color: #64748b;
+    line-height: 1.45; /* Expanded line height prevents text collision */
+    white-space: normal !important; /* Clean multi-line wrapping */
+    word-break: normal;
+}
+
+.tsdRefreshMenu button:hover .tsdMenuHint {
+    color: #334155;
+}
+
+/* 6. Inputs & Selects inside Ribbon Groups */
+.ribbonGroup select,
+.ribbonGroup input[type="text"],
+.ribbonGroup input[type="number"] {
+    height: 30px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 6px !important;
+    padding: 0 8px !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-size: 12px !important;
+    color: #334155 !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    transition: border-color 0.15s ease-in-out !important;
+}
+
+    .ribbonGroup select:hover,
+    .ribbonGroup input:hover {
+        border-color: #94a3b8 !important;
+    }
+
+    .ribbonGroup select:focus,
+    .ribbonGroup input:focus {
+        border-color: #2563d8 !important;
+        outline: 2px solid rgba(37, 99, 235, 0.15) !important;
+    }
+
+/* ==========================================================================
+   MODERN SaaS-STYLE BOTTOM STATUS BAR
+   ========================================================================== */
+
+.status, #status {
+    flex: 0 0 auto !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    background: #0f172a !important; /* Dark Slate background */
+    color: #94a3b8 !important; /* Crisp slate text */
+    border-top: 1px solid #1e293b !important;
+    padding: 0 16px !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-size: 11.5px !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    z-index: 500 !important;
+    user-select: none !important;
+    pointer-events: auto !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.25) !important;
+    letter-spacing: 0.2px !important;
+}
+
+    /* Glowing Status LED Dot */
+    .status::before, #status::before {
+        content: "" !important;
+        display: inline-block !important;
+        width: 7px !important;
+        height: 7px !important;
+        margin-right: 8px !important;
+        border-radius: 50% !important;
+        background-color: #10b981 !important; /* Emerald green LED */
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.7) !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Highlighted text inside status messages */
+    .status strong, #status strong,
+    .status code, #status code {
+        color: #f8fafc !important;
+        font-weight: 600 !important;
+        font-family: inherit !important;
+    }
+
+/* ==========================================================================
+   MATH CANVAS DYNAMIC THEME ENGINE CSS
+   ========================================================================== */
+:root {
+    /* Default Theme Variables */
+    --theme-header-bg: linear-gradient(135deg, #1b2235, #2c3854);
+    --theme-ribbon-panels-bg: #f4f6fa;
+    --theme-ribbon-text: #1d2430;
+    --theme-ribbon-tab-color: #dce4f3;
+    --theme-ribbon-tab-active-bg: #f4f6fa;
+    --theme-ribbon-tab-active-color: #1d3555;
+    --theme-filetabs-container-bg: #1b2235;
+    --theme-filetab-bg: #273044;
+    --theme-filetab-color: #a2acbd;
+    --theme-filetab-active-bg: #f4f6fa;
+    --theme-filetab-active-color: #1d2430;
+    --theme-sidebar-bg: #20283a;
+    --theme-sidebar-header-bg: #1b2235;
+    --theme-sidebar-tab-color: #a2acbd;
+    --theme-sidebar-tab-active-bg: #20283a;
+    --theme-sidebar-tab-active-color: #ffffff;
+    --theme-sidebar-text: #e5eaf4;
+    --theme-viewport-bg: #273044;
+    --theme-status-bg: #0f172a;
+    --theme-status-text: #94a3b8;
+}
+
+/* 1. Header & Quick Access Background */
+header.ribbon {
+    background: var(--theme-header-bg) !important;
+}
+
+/* 2. Ribbon Tabs */
+.ribbonTab {
+    color: var(--theme-ribbon-tab-color) !important;
+}
+
+    .ribbonTab[aria-selected="true"] {
+        background: var(--theme-ribbon-tab-active-bg) !important;
+        color: var(--theme-ribbon-tab-active-color) !important;
+    }
+
+/* 3. Ribbon Panels & Controls */
+.ribbonPanels {
+    background: var(--theme-ribbon-panels-bg) !important;
+    color: var(--theme-ribbon-text) !important;
+}
+
+/* 4. File Tabs Bar */
+.fileTabsContainer {
+    background: var(--theme-filetabs-container-bg) !important;
+}
+
+.fileTab {
+    background: var(--theme-filetab-bg) !important;
+    color: var(--theme-filetab-color) !important;
+}
+
+    .fileTab.active {
+        background: var(--theme-filetab-active-bg) !important;
+        color: var(--theme-filetab-active-color) !important;
+    }
+
+/* 5. Sidebar & Pages/Projects Tabs */
+#pageSidebar {
+    background: var(--theme-sidebar-bg) !important;
+    color: var(--theme-sidebar-text) !important;
+}
+
+.sidebarTabHeader {
+    background: var(--theme-sidebar-header-bg) !important;
+}
+
+    .sidebarTabHeader button.tabBtn {
+        color: var(--theme-sidebar-tab-color) !important;
+    }
+
+        .sidebarTabHeader button.tabBtn.active {
+            background: var(--theme-sidebar-tab-active-bg) !important;
+            color: var(--theme-sidebar-tab-active-color) !important;
+        }
+
+/* 6. Canvas Viewport (Background Behind Pages) */
+#viewport {
+    background-color: var(--theme-viewport-bg) !important;
+}
+
+/* 7. Bottom Status Bar */
+.status, #status {
+    background: var(--theme-status-bg) !important;
+    color: var(--theme-status-text) !important;
+}
+
+/* ==========================================================================
+   THEME-AWARE HEADER & SIDEBAR COMPONENT OVERRIDES
+   ========================================================================== */
+
+/* 1. Quick Access Toolbar Buttons (Undo, Redo, Save, etc.) & Header Text */
+.quickAccessToolbar button {
+    background: var(--theme-header-btn-bg) !important;
+    color: var(--theme-header-btn-color) !important;
+    border: 1px solid var(--theme-header-btn-border, rgba(255, 255, 255, 0.2)) !important;
+}
+
+    .quickAccessToolbar button:hover {
+        background: var(--theme-header-btn-hover, rgba(255, 255, 255, 0.25)) !important;
+        color: var(--theme-header-text) !important;
+    }
+
+.ribbonTitleRow .hint {
+    color: var(--theme-header-text) !important;
+    opacity: 0.85;
+}
+
+/* 2. Projects Panel File Names, Section Titles & Icons */
+.projectList {
+    color: var(--theme-sidebar-text) !important;
+}
+
+.projectItem {
+    color: var(--theme-sidebar-text) !important;
+}
+
+.projectSectionTitle {
+    color: var(--theme-sidebar-title-color) !important;
+}
+
+.projectItemIcon {
+    color: var(--theme-sidebar-text) !important;
+    opacity: 0.75;
+}
+
+/* 3. Pages Sidebar Cards & Borders */
+.pagePreviewCard {
+    background: var(--theme-sidebar-card-bg) !important;
+    border: 1px solid var(--theme-sidebar-card-border) !important;
+    color: var(--theme-sidebar-card-text) !important;
+}
+
+    .pagePreviewCard.active {
+        border: 2px solid #2563d8 !important;
+    }
+
+.pagePreviewHeader span {
+    color: var(--theme-sidebar-card-text) !important;
+}
+
+.pageThumbnail {
+    border: 1px solid var(--theme-sidebar-card-border) !important;
+}
+
+/* 4. Sidebar Action Buttons: Collapse (<) and New Page (+) */
+.sidebarTabHeader .collapseBtn,
+.pageSidebarTools button,
+.pageSidebarHeader button {
+    background: var(--theme-sidebar-btn-bg) !important;
+    color: var(--theme-sidebar-btn-color) !important;
+    border: 1px solid var(--theme-sidebar-btn-border) !important;
+}
+
+    .sidebarTabHeader .collapseBtn:hover,
+    .pageSidebarTools button:hover,
+    .pageSidebarHeader button:hover {
+        filter: brightness(0.92);
+    }
+
+/* 1. Fix Subscript and Superscript alignment in Ribbon Buttons */
+.ribbonGroup button sub,
+.formatButtons button sub {
+    display: inline-block !important;
+    font-size: 0.72em !important;
+    line-height: 0 !important;
+    transform: translateY(3px) !important;
+}
+
+.ribbonGroup button sup,
+.formatButtons button sup {
+    display: inline-block !important;
+    font-size: 0.72em !important;
+    line-height: 0 !important;
+    transform: translateY(-4px) !important;
+}
+
+/* 2. Strict Page Grid Suppression */
+.page.pageGridHidden,
+.pageThumbnail.pageGridHidden {
+    background-image: none !important;
+}
+
+/* ==========================================================================
+   BULLETPROOF SCROLLBAR SUPPRESSION FOR UNSELECTED COLLAPSED TABLES
+   ========================================================================== */
+
+/* 1. Apply hidden overflow and hide Firefox/IE scrollbars on the block AND all inner DOM nodes */
+.block:not(.selected):not(.expanded),
+.block:not(.selected):not(.expanded) * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+    /* 2. Target all WebKit scrollbars (WebView2/Chrome/Edge) on all descendant elements */
+    .block:not(.selected):not(.expanded)::-webkit-scrollbar,
+    .block:not(.selected):not(.expanded) *::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        background: transparent !important;
+    }
+
+/* 3. Force clip scrollable containers inside unselected table blocks, overriding inline styles */
+.block[data-type="table"]:not(.selected):not(.expanded),
+.block[data-type="table"]:not(.selected):not(.expanded) * {
+    overflow: hidden !important;
+}
+
+/* ==========================================================================
+   TABLE BLOCK FORMATTING CONTROLS TOGGLE
+   ========================================================================== */
+body.hide-table-formatting .tableFormatBar,
+body.hide-table-formatting .cellFormatBar,
+body.hide-table-formatting .tableFormatHeader,
+body.hide-table-formatting .tableFormatTools,
+body.hide-table-formatting .tableToolbar,
+body.hide-table-formatting .table-format-controls {
+    display: none !important;
+}
+
+/* ==========================================================================
+   TWO-ROW RIBBON TAB LAYOUT (HOME & INSERT TABS)
+   ========================================================================== */
+
+/* Ensure inactive panels are strictly hidden */
+.ribbonPanel:not(.active) {
+    display: none !important;
+}
+
+/* Enable flex wrapping on active Home & Insert ribbon panels */
+#ribbon-panel-home.active,
+#ribbon-panel-insert.active {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 8px;
+    padding: 4px 8px;
+}
+
+/* Arrange controls inside Home & Insert groups into 2 balanced rows */
+#ribbon-panel-home .ribbonGroup,
+#ribbon-panel-insert .ribbonGroup {
+    display: inline-grid;
+    grid-template-rows: repeat(2, 26px);
+    grid-auto-flow: column;
+    gap: 3px 6px;
+    align-items: center;
+    padding: 6px 10px 22px 10px; /* Reserves bottom space for data-group-label */
+    border-right: 1px solid var(--border-color, #cbd5e1);
+}
+
+    /* Compact sizing for buttons, inputs, selects, and labels in Home & Insert */
+    #ribbon-panel-home .ribbonGroup button,
+    #ribbon-panel-home .ribbonGroup select,
+    #ribbon-panel-home .ribbonGroup input[type="text"],
+    #ribbon-panel-home .ribbonGroup label,
+    #ribbon-panel-insert .ribbonGroup button,
+    #ribbon-panel-insert .ribbonGroup select,
+    #ribbon-panel-insert .ribbonGroup input[type="text"],
+    #ribbon-panel-insert .ribbonGroup label {
+        height: 24px !important;
+        min-height: 24px !important;
+        font-size: 11.5px !important;
+        font-weight: 500;
+        white-space: nowrap;
+        display: inline-flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 2px 8px !important;
+        gap: 5px !important;
+    }
+
+    /* Ensure dropdowns and inputs fit neatly inside the 24px row height */
+    #ribbon-panel-home .ribbonGroup select,
+    #ribbon-panel-home .ribbonGroup input[type="text"],
+    #ribbon-panel-insert .ribbonGroup select,
+    #ribbon-panel-insert .ribbonGroup input[type="text"] {
+        height: 24px !important;
+        padding: 1px 6px !important;
+    }
+
+    #ribbon-panel-home .ribbonGroup input[type="checkbox"],
+    #ribbon-panel-insert .ribbonGroup input[type="checkbox"] {
+        margin: 0;
+    }
+
+/* Shape picker alignment in Insert tab */
+#ribbon-panel-insert .shapePicker {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    height: 24px !important;
+}
+
+    #ribbon-panel-insert .shapePicker label {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 4px !important;
+        margin: 0 !important;
+    }
+
+/* ==========================================================================
+   FLOATING CANVAS COMMENT CALLOUTS & LEADER LINES
+   ========================================================================== */
+
+/* SVG Overlay for Leader Arrows */
+#commentLeaderSvg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 98;
+}
+
+/* Floating Callout Card */
+.commentCalloutCard {
+    position: absolute;
+    z-index: 99;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+    display: flex;
+    flex-direction: column;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-size: 11.5px;
+    color: #1e293b;
+    box-sizing: border-box;
+    overflow: hidden;
+    min-width: 180px;
+    min-height: 100px;
+}
+
+    .commentCalloutCard.completed {
+        opacity: 0.7;
+        border-color: #22c55e;
+    }
+
+/* Header & Drag Handle */
+.calloutHeader {
+    background: #f1f5f9;
+    padding: 4px 8px;
+    font-weight: 600;
+    font-size: 11px;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: move;
+    user-select: none;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+    .calloutHeader .calloutTitle {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+    }
+
+    .calloutHeader .calloutActions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .calloutHeader button {
+        background: none;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        color: #64748b;
+        padding: 0 2px;
+        line-height: 1;
+    }
+
+        .calloutHeader button:hover {
+            color: #0f172a;
+        }
+
+/* Body & Content */
+.calloutBody {
+    padding: 6px 8px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+}
+
+.calloutText {
+    color: #0f172a;
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+    .calloutText[contenteditable="true"] {
+        outline: 1px solid #3b82f6;
+        background: #f8fafc;
+        border-radius: 3px;
+        padding: 2px 4px;
+    }
+
+/* Replies List */
+.calloutReplies {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed #e2e8f0;
+}
+
+.calloutReplyItem {
+    background: #f8fafc;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 11px;
+    color: #334155;
+}
+
+.calloutReplyInput {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+    .calloutReplyInput input {
+        flex: 1;
+        height: 22px;
+        font-size: 11px;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        padding: 0 4px;
+    }
+
+    .calloutReplyInput button {
+        height: 22px;
+        padding: 0 8px;
+        font-size: 10.5px;
+        font-weight: 600;
+        background: #2563d8;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+/* Resize Handle */
+.calloutResizeHandle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 10px;
+    cursor: se-resize;
+    background: linear-gradient(135deg, transparent 50%, #94a3b8 50%);
+}
+
+/* Hide AI Assistant group in Insert ribbon tab */
+.ribbonGroup[data-group-label="AI Assistant"] {
+    display: none !important;
+}
+
+/* Hide AI Sample Generator modal dialog */
+#aiSampleModal {
+    display: none !important;
 }
 
 </style >

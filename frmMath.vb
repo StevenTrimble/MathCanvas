@@ -2061,6 +2061,14 @@ Public Class frmMath
                         totalLength += length
                     End If
 
+                    ' Effective (design) span length reported by TSD. The node-to-node
+                    ' distance above can differ from it, and the analysis result positions
+                    ' are measured along this design segment.
+                    Try
+                        so("designLength") = Convert.ToDouble(span.DesignSegment.Value.Magnitude.Value)
+                    Catch
+                    End Try
+
                     Try
                         Dim elementSection = span.ElementSection.Value
                         so("section") = elementSection.ToString()
