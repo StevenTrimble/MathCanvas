@@ -1,0 +1,5 @@
+cd C:\Users\SWong\source\repos\TSD_Connector_RemotingAPI_2026SP0\TSD_Connector\Math
+
+git add .
+git commit -m "Description"
+git push -u origin main
