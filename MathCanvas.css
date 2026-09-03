@@ -1,0 +1,5375 @@
+﻿<style >
+:root {
+    font-family: Segoe UI, Arial, sans-serif;
+    color: #1d2430;
+    background: #273044;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #273044;
+}
+
+header.ribbon {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    min-width: 0;
+    background: linear-gradient(135deg, #1b2235, #2c3854);
+    color: #fff;
+    border-bottom: 1px solid #596681;
+    box-shadow: 0 2px 8px #10152288;
+}
+
+.ribbonTitleRow {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 5px 14px 2px;
+}
+
+.quickAccessToolbar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-right: 15px;
+}
+
+    .quickAccessToolbar button {
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        color: #e5eaf4;
+        font-size: 15px;
+        padding: 4px 7px;
+        cursor: pointer;
+        line-height: 1;
+        transition: all 0.15s;
+    }
+
+        .quickAccessToolbar button:hover {
+            background: #ffffff25;
+            color: #fff;
+            border-color: #596681;
+        }
+
+.toolbarSeparator {
+    width: 1px;
+    height: 16px;
+    background: #596681;
+    margin: 0 4px;
+}
+
+.hint {
+    margin-left: auto;
+    color: #c0c9dc;
+    font-size: 12px;
+}
+
+.ribbonTabs {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    min-height: 32px;
+    padding: 0 10px;
+    overflow-x: auto;
+}
+
+.ribbonTab {
+    min-width: 72px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    border-radius: 4px 4px 0 0;
+    background: transparent;
+    padding: 7px 14px 6px;
+    color: #dce4f3;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .ribbonTab:hover {
+        background: #ffffff12;
+        color: #fff;
+    }
+
+    .ribbonTab[aria-selected=true] {
+        border-color: #98a4b9;
+        background: #f4f6fa;
+        color: #1d3555;
+    }
+
+    .ribbonTab:focus {
+        outline: 2px solid #8bb5ff;
+        outline-offset: -2px;
+    }
+
+.ribbonPanels {
+    min-height: 91px;
+    border-top: 1px solid #98a4b9;
+    background: #f4f6fa;
+    color: #1d2430;
+}
+
+.ribbonPanel {
+    display: none;
+    align-items: stretch;
+    min-height: 90px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+    .ribbonPanel.active {
+        display: flex;
+    }
+
+.ribbonGroup {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 90px;
+    padding: 8px 12px 22px;
+    border-right: 1px solid #c8ced9;
+}
+
+    .ribbonGroup:after {
+        position: absolute;
+        right: 6px;
+        bottom: 3px;
+        left: 6px;
+        color: #68758a;
+        font-size: 10px;
+        text-align: center;
+        white-space: nowrap;
+        content: attr(data-group-label);
+    }
+
+    .ribbonGroup button {
+        min-height: 28px;
+        white-space: nowrap;
+    }
+
+    .ribbonGroup label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        color: #52607a;
+        font-size: 10px;
+    }
+
+        .ribbonGroup label.inlineOption {
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+
+    .ribbonGroup select, .ribbonGroup input {
+        height: 28px;
+        min-width: 72px;
+        border: 1px solid #9ca7b8;
+        border-radius: 3px;
+        background: #fff;
+        padding: 3px 5px;
+        color: #1d2430;
+    }
+
+        .ribbonGroup input[type=checkbox], .ribbonGroup input[type=color] {
+            min-width: 0;
+        }
+
+        .ribbonGroup input[type=color] {
+            width: 38px;
+            padding: 2px;
+        }
+
+.quickCalc {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .quickCalc input {
+        width: 270px;
+        min-width: 180px;
+    }
+
+.insertActions {
+    max-width: 630px;
+}
+
+    .insertActions button {
+        flex: 0 0 auto;
+    }
+
+.formatting select {
+    min-width: 84px;
+}
+
+.formatButtons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+    .formatButtons button {
+        min-width: 32px;
+    }
+
+.pages select {
+    min-width: 130px;
+}
+
+.pageLayoutToolbar {
+    position: relative;
+    display: block;
+}
+
+    .pageLayoutToolbar summary {
+        border: 1px solid #7e8ba0;
+        border-radius: 3px;
+        background: #e7ecf4;
+        padding: 6px 10px;
+        color: #27344b;
+        cursor: pointer;
+        list-style: none;
+        white-space: nowrap;
+    }
+
+        .pageLayoutToolbar summary::-webkit-details-marker {
+            display: none;
+        }
+
+    .pageLayoutToolbar[open] summary {
+        border-color: #4d83dd;
+        background: #dbe9ff;
+        color: #174d89;
+    }
+
+.pageLayoutPanel {
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    left: 16px;
+    right: 16px;
+    top: 154px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 7px;
+    border: 1px solid #64718d;
+    border-radius: 4px;
+    background: #20283af5;
+    padding: 9px;
+    box-shadow: 0 6px 20px #101522aa;
+}
+
+.pageLayoutToolbar:not([open]) .pageLayoutPanel {
+    display: none;
+}
+
+.pageLayoutToolbar label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: #c0c9dc;
+    font-size: 10px;
+}
+
+.pageLayoutToolbar select, .pageLayoutToolbar input {
+    height: 27px;
+    min-width: 72px;
+    border: 1px solid #8c98b0;
+    border-radius: 3px;
+    background: #fff;
+    padding: 3px 5px;
+    color: #1d2430;
+}
+
+.pageLayoutToolbar .layoutText {
+    width: 125px;
+}
+
+.pageLayoutToolbar .layoutNumber {
+    width: 66px;
+    min-width: 66px;
+}
+
+.pageLayoutToolbar .customPageSize {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+    .pageLayoutToolbar .customPageSize[hidden] {
+        display: none;
+    }
+
+@media(max-width:700px) {
+    .ribbonTitleRow {
+        padding-right: 8px;
+    }
+
+    .hint {
+        display: none;
+    }
+
+    .ribbonTab {
+        min-width: 64px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .quickCalc input {
+        width: 220px;
+    }
+
+    .pageLayoutPanel {
+        top: 154px;
+    }
+}
+
+#viewport {
+    --canvas-grid-color: #36405a;
+    --canvas-grid-dot: 1px;
+    --canvas-grid-spacing: 18px;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: 30px;
+    background-color: #273044;
+    background-image: radial-gradient(circle, var(--canvas-grid-color) 0 var(--canvas-grid-dot), transparent calc(var(--canvas-grid-dot) + .3px));
+    background-size: var(--canvas-grid-spacing) var(--canvas-grid-spacing);
+    scroll-behavior: smooth;
+    min-width: 0;
+}
+
+    #viewport.gridHidden {
+        background-image: none;
+    }
+
+#paper {
+    position: relative;
+    margin: 0 auto;
+    min-width: 794px;
+    min-height: 1123px;
+}
+
+.page {
+    --page-background: #fff;
+    --page-grid-color: #edf0f5;
+    --page-grid-spacing: 20px;
+    position: absolute;
+    left: 0;
+    background-color: var(--page-background);
+    box-shadow: 0 4px 25px #1119;
+    background-image: linear-gradient(var(--page-grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--page-grid-color) 1px, transparent 1px);
+    background-size: var(--page-grid-spacing) var(--page-grid-spacing);
+}
+
+    .page.pageGridHidden {
+        background-image: none;
+    }
+
+.pageHeader:empty:after, .pageFooter:empty:after {
+    color: #a2acbd;
+    font-style: italic;
+}
+
+.pageHeader:empty:after {
+    content: "Header";
+}
+
+.pageFooter:empty:after {
+    content: "Footer";
+}
+
+.printRange {
+    width: 112px;
+}
+
+    .printRange:disabled {
+        background: #e7eaf0;
+        color: #8b94a5;
+    }
+
+#printRoot {
+    display: none;
+}
+
+/* Keep uncollapsed (expanded) controls at default white background */
+#paper .block.expanded {
+    background-color: #ffffffeb !important;
+}
+
+    #paper .block.expanded .calcSection {
+        background: #fbfcfe !important;
+    }
+
+    #paper .block.expanded .calcReview {
+        background: #ffffff !important;
+    }
+
+    #paper .block.expanded .calcInputDesigner {
+        background: #f7f9fc !important;
+    }
+
+/* Allow page control background color to show through inner calculation cards */
+.calcBlock .calcSection,
+.calcBlock .calcReview,
+.calcBlock .calcInputDesigner {
+    background: transparent !important;
+}
+
+.fileTab.active {
+    background: #f4f6fa !important;
+    color: #1d2430 !important;
+    border-top-color: #2563d8 !important;
+}
+
+.block {
+    position: absolute;
+    isolation: isolate; /* Prevents inner z-index values from leaking outside */
+    z-index: 1;
+    min-width: 190px;
+    min-height: 70px;
+    border: 1px solid #aab4c5;
+    border-style: var(--block-border-style, solid);
+    border-radius: 5px;
+    background: #ffffffeb;
+    box-shadow: 0 2px 7px #26344a25;
+    overflow: hidden;
+}
+
+    .block.edgeDraggable, .block.edgeDraggable * {
+        cursor: move !important;
+    }
+
+        .block.edgeDraggable .close {
+            cursor: pointer !important;
+        }
+
+    /* Ensures Uncollapsed (Expanded) controls stack ABOVE collapsed controls */
+    .block.expanded {
+        z-index: 2;
+        height: auto !important;
+    }
+
+    .block.userSized {
+        height: var(--block-height) !important;
+    }
+
+    /* Ensures currently selected controls always take top priority */
+    .block.selected {
+        z-index: 10 !important;
+        border: 3px solid #2563d8 !important;
+        box-shadow: 0 0 0 3px #8bb5ff99, 0 4px 12px #26344a55;
+        background-color: #e7f0ff !important;
+    }
+
+        .block.selected .handle {
+            background: #e7f0ff;
+            color: #174d89;
+        }
+
+    .block:not(.expanded) {
+        min-height: 42px;
+        height: auto !important;
+    }
+
+        .block:not(.expanded).userSized {
+            height: var(--block-height) !important;
+        }
+
+        .block:not(.expanded) .body {
+            display: none;
+        }
+
+    .block:not(.shapeBlock):not(.expanded):not(.selected) .handle {
+        display: none;
+    }
+
+    .block:not(.shapeBlock).selected:not(.expanded) .handle {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 0;
+        padding: 0;
+        background: transparent;
+        color: transparent;
+        font-size: 0;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .block:not(.shapeBlock).selected:not(.expanded) .close {
+        display: block;
+        pointer-events: auto;
+        color: #9c3f4c;
+        font-size: 14px;
+        background: #ffffffeb;
+        border: 1px solid #aab4c5;
+        border-radius: 3px;
+        box-shadow: 0 2px 5px #26344a55;
+        padding: 0 3px;
+    }
+
+.resizeHandle {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    z-index: 6;
+    cursor: nwse-resize;
+    background: linear-gradient(135deg, transparent 0 45%, #2563d8 46% 56%, transparent 57% 66%, #2563d8 67% 77%, transparent 78%);
+}
+
+.block.selected .resizeHandle {
+    display: block;
+}
+
+.preview {
+    display: none;
+    padding: 8px;
+    font-family: Cambria, serif;
+    font-size: 18px;
+    min-height: 40px;
+    cursor: text;
+}
+
+.block:not(.expanded) .preview {
+    display: block;
+}
+
+/* Force preview container to stay hidden when control is uncollapsed */
+.block.expanded .preview,
+.tableBlock.expanded .preview {
+    display: none !important;
+}
+
+/* Restrict preview block containment strictly to collapsed mode */
+.tableBlock:not(.expanded):not(.autoExtendTable):not(.isTableChunk) .preview {
+    height: 100% !important;
+    max-height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+
+
+.equationBlock:not(.expanded):not(.userSized) .preview {
+    max-height: 90px;
+    overflow: auto;
+}
+
+.block.sampleAutoSized:not(.expanded) .preview {
+    max-height: none;
+    overflow: visible;
+}
+
+.equationBlock:not(.expanded).userSized {
+    display: flex;
+    flex-direction: column;
+}
+
+    .equationBlock:not(.expanded).userSized .preview {
+        flex: 1;
+        min-height: 0;
+        overflow: auto;
+    }
+
+.equationBlock.expanded {
+    display: flex;
+    flex-direction: column;
+}
+
+    .equationBlock.expanded .body {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+        flex-direction: column;
+    }
+
+    .equationBlock.expanded .equationEditor {
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+        overflow: auto;
+    }
+
+.previewText {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    outline: 0;
+}
+
+.calcBlock {
+    min-width: 325px;
+}
+
+    .calcBlock .result, .calcBlock .steps {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .calcBlock .mathExpression {
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+
+.equationFormulaLine {
+    display: block;
+    max-width: 100%;
+    margin: .12em 0;
+    overflow-x: auto;
+}
+
+/* Layout and Spacing for Text Editors */
+.richTextEditor div, .richTextEditor p, .richTextEditor ul, .richTextEditor ol {
+    margin-bottom: var(--p-spacing, 0em);
+}
+
+.richTextEditor {
+    column-gap: 20px;
+}
+
+    .richTextEditor ul, .richTextEditor ol {
+        padding-left: 24px;
+        margin-top: 4px;
+    }
+
+    .richTextEditor a {
+        color: #2563d8;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+.link-result-item {
+    padding: 6px 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #edf0f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .link-result-item:hover {
+        background: #eef5ff;
+    }
+
+.link-result-type {
+    font-size: 9px;
+    color: #a2acbd;
+    text-transform: uppercase;
+    background: #f4f6fa;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Editable Inline Calculation Badge */
+.inline-calc {
+    display: inline-flex;
+    align-items: baseline;
+    background: rgba(139, 181, 255, 0.15);
+    border: 1px dashed #8bb5ff;
+    border-radius: 4px;
+    padding: 0 4px;
+    margin: 0 2px;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    vertical-align: baseline;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+    .inline-calc.collapsed {
+        background: transparent;
+        border-color: transparent;
+        border-bottom: 1px solid #4d83dd;
+        border-radius: 0;
+        padding: 0 1px;
+    }
+
+        .inline-calc.collapsed .inline-calc-expr {
+            display: none;
+        }
+
+.inline-calc-expr {
+    outline: none;
+    min-width: 1ch;
+    color: inherit;
+    cursor: text;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .inline-calc-expr:empty::before {
+        content: "math";
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
+.inline-calc-result {
+    font-weight: 600;
+    margin-left: 3px;
+    user-select: none;
+    color: inherit;
+}
+
+.inline-calc.collapsed .inline-calc-result {
+    margin-left: 0;
+}
+
+.inline-calc[data-raw-mode="true"] .inline-calc-expr {
+    font-family: Consolas, monospace;
+}
+
+/* Plot Control Tabs & Layout */
+.plotTabs {
+    display: flex;
+    gap: 2px;
+    margin: 6px 0 0 0;
+    border-bottom: 1px solid #dce2ec;
+}
+
+.plotTab {
+    padding: 5px 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    border-radius: 4px 4px 0 0;
+    color: #52607a;
+    font-size: 11px;
+    cursor: pointer;
+    margin-bottom: -1px;
+}
+
+    .plotTab.active {
+        background: #fff;
+        border-color: #dce2ec;
+        border-bottom-color: #fff;
+        color: #174d89;
+        font-weight: 600;
+    }
+
+    .plotTab:hover:not(.active) {
+        background: #f7f9fc;
+    }
+
+.plotPanel {
+    display: none;
+    padding: 8px 0;
+}
+
+    .plotPanel.active {
+        display: block;
+    }
+
+.plotOptions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 6px;
+}
+
+    .plotOptions label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        color: #52607a;
+        font-size: 10px;
+    }
+
+    .plotOptions input, .plotOptions select {
+        width: 100%;
+        min-width: 0;
+        padding: 4px;
+        border: 1px solid #bdc5d4;
+        border-radius: 3px;
+        background: #fff;
+        font: 11px Segoe UI, Arial, sans-serif;
+    }
+
+    .plotOptions label.wide {
+        grid-column: 1 / -1;
+    }
+
+.block.compactPlot .plotOptions {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+}
+
+.plotBlock.expanded {
+    display: flex;
+    flex-direction: column;
+}
+
+    .plotBlock.expanded .body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+    }
+
+.plotCanvas {
+    width: 100%;
+    flex: 1;
+    min-height: 120px;
+    border: 1px solid #dce2ec;
+    border-radius: 3px;
+    background: #fff;
+}
+
+.previewPlot {
+    height: 190px;
+    border: 0;
+    background: transparent;
+}
+
+.plotFormula {
+    color: #52607a;
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.plotActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6px 0;
+    color: #657188;
+    font-size: 10px;
+}
+
+/* MULTIPLE SPOTLIGHT CAMERAS CSS */
+.spotlight-panel {
+    position: absolute;
+    top: 80px;
+    right: 40px;
+    background: #ffffffeb;
+    border: 1px solid #aab4c5;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+    resize: both;
+    overflow: hidden;
+    min-width: 200px;
+    min-height: 100px;
+}
+
+    .spotlight-panel.minimized {
+        width: auto !important;
+        height: auto !important;
+        min-width: 150px !important;
+        min-height: 0 !important;
+        resize: none !important;
+    }
+
+        .spotlight-panel.minimized .spotlight-body {
+            display: none;
+        }
+
+.spotlight-header {
+    background: linear-gradient(135deg, #1b2235, #2c3854);
+    color: #fff;
+    padding: 8px 14px;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 7px 7px 0 0;
+    user-select: none;
+    touch-action: none;
+}
+
+    .spotlight-header span {
+        pointer-events: none;
+    }
+
+.spotlight-controls {
+    display: flex;
+    align-items: center;
+}
+
+    .spotlight-controls button {
+        background: transparent;
+        border: none;
+        color: #c0c9dc;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 16px;
+        line-height: 1;
+        padding: 0;
+    }
+
+        .spotlight-controls button:hover {
+            color: #fff;
+        }
+
+.spotlight-body {
+    padding: 0;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    position: relative;
+    display: flex;
+}
+
+    .spotlight-body > .block {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 0 7px 7px !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    .spotlight-body .handle {
+        pointer-events: none;
+    }
+
+    .spotlight-body .close, .spotlight-body .spotlight-btn {
+        display: none !important;
+    }
+
+/* Block Header Action Buttons (🎥 Spotlight & × Close) */
+.block .handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    z-index: 25;
+}
+
+.spotlight-btn {
+    position: absolute;
+    right: 28px !important;
+    top: 3px !important;
+    color: #2563d8;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 3px;
+    line-height: 16px;
+    display: block;
+    font-size: 14px;
+    background: #ffffffeb;
+    border: 1px solid #aab4c5;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px #26344a55;
+    pointer-events: auto !important;
+    z-index: 30 !important;
+}
+
+.close {
+    position: absolute;
+    right: 6px !important;
+    top: 2px !important;
+    color: #9c3f4c;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 3px;
+    line-height: 16px;
+    z-index: 30 !important;
+    pointer-events: auto !important;
+}
+
+.block:not(.expanded) .spotlight-btn {
+    display: none;
+}
+
+.block.selected:not(.expanded) .spotlight-btn {
+    display: block;
+}
+
+.shapeBlock:not(.expanded) .spotlight-btn {
+    display: none;
+}
+
+.shapeBlock.selected:not(.expanded) .spotlight-btn {
+    display: block;
+    right: 28px !important;
+}
+
+.block.edgeDraggable .spotlight-btn {
+    cursor: pointer !important;
+}
+
+.autocomplete-dropdown {
+    position: absolute;
+    background: #ffffff;
+    border: 1px solid #8bb5ff;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2147483647;
+    max-height: 220px;
+    overflow-y: auto;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    display: none;
+    min-width: 150px;
+    color: #1d2430;
+}
+
+.autocomplete-item {
+    padding: 6px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+    .autocomplete-item strong {
+        color: #2563d8;
+    }
+
+    .autocomplete-item.selected, .autocomplete-item:hover {
+        background: #eef5ff;
+        color: #174d89;
+    }
+
+.autocomplete-type {
+    float: right;
+    color: #a2acbd;
+    font-size: 10px;
+    margin-left: 15px;
+    text-transform: uppercase;
+}
+
+/* Quoted TSD names inside an expression are shown verbatim, never as math */
+.mathString {
+    font-family: Consolas, monospace;
+    font-style: normal;
+    color: #0b7261;
+    white-space: pre;
+}
+
+/* Token aware argument picker (tsd* function arguments) */
+.autocomplete-arg-header {
+    padding: 5px 10px;
+    background: #eef5ff;
+    border-bottom: 1px solid #d6e4fb;
+    color: #174d89;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.autocomplete-search {
+    display: block;
+    width: calc(100% - 16px);
+    margin: 6px 8px;
+    padding: 4px 6px;
+    border: 1px solid #c6d6ef;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 12px;
+    color: #1d2430;
+    box-sizing: border-box;
+}
+
+.autocomplete-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* The inner list scrolls in argument mode, so the outer box must not clip it */
+.autocomplete-dropdown:has(.autocomplete-list) {
+    max-height: none;
+    overflow: visible;
+}
+
+.gridEditor {
+    min-width: 0;
+    margin: 7px 0;
+}
+
+.gridHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    color: #52607a;
+    font-size: 11px;
+}
+
+    .gridHeader strong {
+        margin-right: auto;
+    }
+
+    .gridHeader label {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+
+    .gridHeader input {
+        width: 48px;
+        min-width: 0;
+    }
+
+.gridHint {
+    margin: 3px 0;
+    color: #657188;
+    font-size: 10px;
+}
+
+/* Cell level formatting bar for the Table A / Table B input grids. */
+.cellFormatBar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin: 0 0 4px;
+    padding: 3px 5px;
+    border: 1px solid #bdc5d4;
+    border-radius: 3px;
+    background: #f4f6fa;
+    font-size: 10px;
+}
+
+    .cellFormatBar .cellFormatLabel {
+        font-weight: 700;
+        color: #3c4657;
+    }
+
+    .cellFormatBar .cellFormatCount {
+        color: #657188;
+        font-style: italic;
+    }
+
+    .cellFormatBar button.active {
+        background: #2f6bc2;
+        border-color: #2f6bc2;
+        color: #fff;
+    }
+
+    .cellFormatBar label {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        color: #4a5566;
+    }
+
+    .cellFormatBar input[type="color"] {
+        width: 26px;
+        height: 18px;
+        padding: 0;
+    }
+
+    .cellFormatBar input[type="number"] {
+        width: 44px;
+    }
+
+/* Selected cells get an obvious highlight fill. The rules use !important so the
+   highlight also wins over the per-cell inline fill colour while selected. */
+.inputGrid td.gridCellSelected {
+    outline: 2px solid #2f6bc2;
+    outline-offset: -2px;
+    background: #ffe58a !important;
+    box-shadow: inset 0 0 0 9999px rgba(255, 214, 10, 0.35);
+}
+
+    .inputGrid td.gridCellSelected input,
+    .inputGrid td.gridCellSelected textarea {
+        background: transparent !important;
+    }
+
+.gridScroll {
+    max-width: 100%;
+    overflow: auto;
+    border: 1px solid #bdc5d4;
+    background: #fff;
+}
+
+.inputGrid {
+    min-width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+    .inputGrid th {
+        position: relative;
+        min-width: 34px;
+        padding: 4px;
+        border-right: 1px solid #d5dae3;
+        border-bottom: 1px solid #bdc5d4;
+        background: #e9edf4;
+        color: #52607a;
+        font: 600 10px Segoe UI, Arial, sans-serif;
+        text-align: center;
+    }
+
+    /* Drag grips sit on the boundary between two header cells. They own the resize cursor so
+       the surrounding header keeps its add row / add column affordance. */
+    .inputGrid th .colResizeGrip {
+        position: absolute;
+        top: 0;
+        right: -3px;
+        width: 7px;
+        height: 100%;
+        cursor: col-resize;
+        z-index: 3;
+    }
+
+    .inputGrid th .rowResizeGrip {
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 100%;
+        height: 7px;
+        cursor: row-resize;
+        z-index: 3;
+    }
+
+    .inputGrid th .colResizeGrip:hover,
+    .inputGrid th .rowResizeGrip:hover {
+        background: rgba(37, 99, 216, .35);
+    }
+
+    .inputGrid col.gridRowHeaderCol {
+        width: 34px;
+    }
+
+    .inputGrid td {
+        min-width: 82px;
+        padding: 0;
+        border-right: 1px solid #d5dae3;
+        border-bottom: 1px solid #d5dae3;
+    }
+
+    .inputGrid tr:last-child td, .inputGrid tr:last-child th {
+        border-bottom: 0;
+    }
+
+    .inputGrid th:last-child, .inputGrid td:last-child {
+        border-right: 0;
+    }
+
+.body .inputGrid input {
+    display: block;
+    width: 100%;
+    min-width: 82px;
+    height: 28px;
+    border: 0;
+    padding: 4px 6px;
+    background: transparent;
+    font: 12px Consolas, monospace;
+    text-align: right;
+}
+
+.inputGrid input:focus {
+    outline: 2px solid #2563d8;
+    outline-offset: -2px;
+    background: #eef5ff;
+}
+
+.tableAssignmentBar {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(95px, .8fr);
+    gap: 6px;
+}
+
+    .tableAssignmentBar label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+        color: #52607a;
+        font-size: 10px;
+    }
+
+    .tableAssignmentBar input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .tableAssignmentBar .tableSource {
+        grid-column: 1/-1;
+    }
+
+.tableSourceHint {
+    margin: 0;
+    color: #657188;
+    font-size: 9px;
+}
+
+.tableOperationBar {
+    display: grid;
+    grid-template-columns: minmax(135px, 1fr) repeat(2, minmax(72px, 100px));
+    align-items: end;
+    gap: 6px;
+    margin: 6px 0;
+}
+
+    .tableOperationBar label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+        color: #52607a;
+        font-size: 10px;
+    }
+
+    .tableOperationBar select, .tableOperationBar input {
+        width: 100%;
+        min-width: 0;
+    }
+
+.calcOptions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+    .calcOptions label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #52607a;
+        font-size: 11px;
+    }
+
+    .calcOptions input {
+        width: 52px !important;
+    }
+
+.calcInputHeader {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+    align-items: end;
+    gap: 6px;
+}
+
+    .calcInputHeader > input, .calcInputHeader select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .calcInputHeader label, .calcInputDesigner label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        color: #52607a;
+        font-size: 10px;
+    }
+
+.calcExpression {
+    display: block;
+    width: 100%;
+    min-height: 38px;
+    margin-top: 6px;
+    resize: vertical;
+}
+
+.calcInputDesigner {
+    min-width: 0;
+    margin-top: 6px;
+    border: 1px solid #d5dbe5;
+    border-radius: 3px;
+    background: #f7f9fc;
+    padding: 6px;
+}
+
+.calcInputControl {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+}
+
+    .calcInputControl > input[type=number], .calcInputControl > input[type=text], .calcInputControl > select {
+        width: 100%;
+        min-width: 0;
+        flex: 1 1 120px;
+    }
+
+    .calcInputControl > input[type=range] {
+        min-width: 100px;
+        flex: 1 1 140px;
+    }
+
+    .calcInputControl output {
+        min-width: 45px;
+        font-weight: 600;
+        text-align: right;
+    }
+
+.calcChoiceList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+    gap: 4px;
+    width: 100%;
+    min-width: 0;
+}
+
+    .calcChoiceList label {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 5px;
+        min-width: 0;
+        color: #1d2430;
+        font-size: 11px;
+        overflow-wrap: anywhere;
+    }
+
+.calcChoiceConfig {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    margin-top: 6px;
+}
+
+    .calcChoiceConfig textarea {
+        width: 100%;
+        min-height: 58px;
+        resize: vertical;
+        font: 10px Consolas, monospace;
+    }
+
+.calcRangeConfig {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    gap: 5px;
+    margin-top: 6px;
+}
+
+    .calcRangeConfig input {
+        width: 100%;
+        min-width: 0;
+    }
+
+.calcInputHint {
+    margin: 4px 0 0;
+    color: #657188;
+    font-size: 9px;
+}
+
+.calcPreview {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
+    min-width: 0;
+}
+
+.calcPreviewControl {
+    min-width: 0;
+    border-bottom: 1px solid #dce2ec;
+    padding-bottom: 7px;
+    padding-right: 55px;
+    font: 12px Segoe UI, Arial, sans-serif;
+}
+
+    .calcPreviewControl .calcInputControl {
+        align-items: flex-start;
+    }
+
+.calcPreviewOutput {
+    min-width: 0;
+}
+
+.calcBlock:not(.expanded) .preview:has(.calcPreviewControl) {
+    cursor: default;
+}
+
+.calcBlock:not(.expanded) .calcPreview .previewText {
+    font-family: Cambria Math, Cambria, serif;
+    font-size: 18px;
+}
+
+.calcBlock:not(.expanded) .calcChoiceList {
+    max-height: 94px;
+    overflow: auto;
+}
+
+.calcBlock:not(.expanded) .calcInputControl input, .calcBlock:not(.expanded) .calcInputControl select {
+    font: 12px Segoe UI, Arial, sans-serif;
+}
+
+/* Flex Wrapper for Matrix + Unit Label */
+.matrixWithUnit {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Scrollable Table Frame with Top Horizontal Scrollbar */
+.matrixFrame {
+    flex: 1 1 auto !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    max-height: 380px !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important; /* Enables vertical scrolling for sticky header freeze */
+    position: relative !important;
+    z-index: 1 !important;
+    box-sizing: border-box !important;
+    padding-bottom: 4px;
+    transform: none !important; /* Disables transforms that break position: sticky */
+    -webkit-transform: none !important;
+}
+
+    .matrixFrame.noBrackets:before, .matrixFrame.noBrackets:after {
+        display: none !important;
+        content: none !important;
+    }
+
+    /* Flip table content back right-side up */
+    .matrixFrame > table,
+    .matrixTable {
+        transform: none !important;
+        -webkit-transform: none !important;
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        width: 100% !important;
+    }
+
+        .matrixTable td {
+            min-width: 1.5em;
+            padding: 0;
+            text-align: center;
+        }
+
+        .matrixTable thead {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10 !important;
+            background: #e9edf4 !important;
+        }
+
+            .matrixTable thead tr {
+                background: #e9edf4 !important;
+            }
+
+            .matrixTable thead th {
+                position: sticky !important;
+                top: 0 !important;
+                z-index: 10 !important;
+                background: #e9edf4 !important; /* Prevents scrolling body cells from showing through */
+                box-shadow: 0 1px 0 #cbd2df; /* Header bottom border line */
+            }
+
+
+        .matrixTable.reportTable,
+        .matrixTable.outputTable {
+            width: max-content !important;
+            min-width: 100% !important;
+        }
+
+            .matrixTable.reportTable th,
+            .matrixTable.reportTable td {
+                white-space: nowrap;
+            }
+
+.matrixUnit {
+    flex: 0 0 auto;
+    font-family: Cambria Math, Cambria, serif;
+    white-space: nowrap;
+}
+
+.matrixOutput {
+    padding: 7px 0;
+    text-align: center;
+}
+
+.matrixStep {
+    max-width: 100%;
+    margin: 5px 0;
+    overflow: auto;
+}
+
+.matrixStepLabel, /*  Force block display and horizontal centering for title & operation subtitle */
+.tablePreviewTitle,
+.tablePreviewOperation {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    align-self: center !important;
+}
+
+.tablePreviewTitle {
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/* Reserve right padding only when table control is selected/active to clear overlay buttons */
+.tableBlock.selected .tablePreviewTitle {
+    padding-right: 240px !important;
+}
+
+.tablePreviewOperation {
+    color: #657188;
+    font-size: 11px;
+}
+
+.calculationMatrix {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    max-width: 100%;
+    margin: .2em 0;
+}
+
+    .calculationMatrix > .mathExpression {
+        flex: 0 0 auto;
+    }
+
+    .calculationMatrix .matrixWithUnit {
+        min-width: 0;
+    }
+
+.calcBlock .result > .calculationMatrix {
+    justify-content: center;
+}
+
+.calcBlock .stepLine.matrixResultStep {
+    align-items: center;
+}
+
+    .calcBlock .stepLine.matrixResultStep .calculationMatrix {
+        flex: 1;
+        min-width: 0;
+        margin: 0;
+    }
+
+.calcBlock:not(.expanded) .calculationMatrix {
+    justify-content: center;
+}
+
+/* Center flex children inside collapsed preview containers */
+.tableBlock:not(.expanded) .preview {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.tableBlock:not(.expanded).userSized {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+    .tableBlock:not(.expanded).userSized .preview {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: hidden !important;
+    }
+
+    .tableBlock:not(.expanded).userSized .tablePreviewResult {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: auto !important;
+    }
+
+    .tableBlock:not(.expanded).userSized .matrixWithUnit {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 0 !important;
+    }
+
+    .tableBlock:not(.expanded).userSized .matrixFrame {
+        flex: 1 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
+        overflow: auto !important;
+    }
+
+    .tableBlock:not(.expanded).userSized .matrixTable {
+        width: 100% !important;
+    }
+
+.tableBlock:not(.expanded) {
+    overflow: hidden !important;
+}
+
+    .tableBlock:not(.expanded).userSized .preview > * {
+        flex: 0 0 auto;
+        max-width: 100%;
+    }
+
+.tableBlock.sampleAutoSized:not(.expanded) .preview {
+    max-height: none;
+    overflow: visible;
+}
+
+.tableBlock:not(.expanded) .matrixWithUnit {
+    font-size: 18px;
+}
+
+.tableBlock:not(.expanded) .matrixTable {
+    font-size: 18px;
+}
+
+.tableBlock:not(.expanded) .steps {
+    margin-top: 8px;
+    border-top: 1px solid #dce2ec;
+    padding-top: 6px;
+    font-size: 11px;
+    text-align: left;
+}
+
+/* Table Preview Overlay (Positioned left of Spotlight/Close controls) */
+.tablePreviewOverlay {
+    position: absolute;
+    top: 4px;
+    right: 68px !important;
+    z-index: 20;
+    display: none;
+    gap: 4px;
+    pointer-events: none !important;
+    align-items: center;
+}
+
+.tableBlock.selected .tablePreviewOverlay {
+    display: flex;
+}
+
+.tablePreviewBtn {
+    background: #ffffffea;
+    border: 1px solid #2563d8;
+    color: #174d89;
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.15s ease;
+    backdrop-filter: blur(4px);
+    pointer-events: auto !important;
+    height: 16px;
+    white-space: nowrap;
+}
+
+    .tablePreviewBtn:hover {
+        background: #2563d8;
+        color: #ffffff;
+    }
+
+    .tablePreviewBtn.active {
+        background: #1e40af;
+        color: #ffffff;
+        border-color: #1e3a8a;
+    }
+
+/* Quick Action Buttons for Collapsed CAD Control */
+.cadPreviewOverlay {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 15;
+    display: none;
+    gap: 5px;
+}
+
+.cadBlock.selected:not(.expanded) .cadPreviewOverlay {
+    display: flex;
+}
+
+.cadPreviewBtn {
+    background: #ffffffea;
+    border: 1px solid #2563d8;
+    color: #174d89;
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: all 0.15s ease;
+    backdrop-filter: blur(4px);
+}
+
+    .cadPreviewBtn:hover {
+        background: #2563d8;
+        color: #ffffff;
+    }
+
+.cadBlock {
+    min-width: 430px;
+}
+
+    .cadBlock:not(.expanded).userSized {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .cadBlock:not(.expanded).userSized .preview {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+            height: 100%;
+        }
+
+            .cadBlock:not(.expanded).userSized .preview .cadCanvas {
+                height: 100% !important;
+                width: 100% !important;
+                flex: 1;
+            }
+
+.cadToolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+    .cadToolbar input {
+        min-width: 160px;
+        flex: 1;
+    }
+
+    .cadToolbar label {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: #52607a;
+        font-size: 11px;
+    }
+
+        .cadToolbar label input {
+            min-width: 55px;
+            width: 70px;
+        }
+
+.cadWorkspace {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 360px;
+}
+
+.cadCanvas {
+    width: 100%;
+    height: 350px;
+    border: 1px solid #536078;
+    background: #151b25;
+    cursor: grab;
+    touch-action: none;
+}
+
+    .cadCanvas.panning {
+        cursor: grabbing;
+    }
+
+.cadPanel {
+    padding: 8px;
+    border: 1px solid #cbd2df;
+    background: #f7f9fc;
+    font-size: 11px;
+}
+
+    .cadPanel h3 {
+        margin: 0 0 5px;
+        color: #27344b;
+        font-size: 12px;
+    }
+
+.cadLayers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 4px 8px;
+}
+
+.cadLayer {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr) 30px 46px 22px;
+    align-items: center;
+    gap: 3px;
+}
+
+    .cadLayer input[type=text], .cadLayer input[type=number] {
+        width: 100%;
+        min-width: 0;
+        padding: 3px;
+        border: 1px solid #bdc5d4;
+    }
+
+    .cadLayer input[type=color] {
+        width: 30px;
+        height: 24px;
+        padding: 1px;
+        border: 1px solid #bdc5d4;
+    }
+
+    .cadLayer button {
+        padding: 2px;
+    }
+
+.cadEntityHeader {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+    .cadEntityHeader h3 {
+        margin: 0 auto 0 0;
+    }
+
+.cadEntityTableWrap {
+    max-width: 100%;
+    max-height: 390px;
+    margin-top: 6px;
+    overflow: auto;
+    border: 1px solid #aeb8c9;
+    background: #fff;
+}
+
+.cadEntityTable {
+    width: 100%;
+    min-width: 960px;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+    .cadEntityTable th {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        padding: 5px;
+        border-right: 1px solid #c9d0dc;
+        border-bottom: 1px solid #aeb8c9;
+        background: #e9edf4;
+        color: #52607a;
+        text-align: left;
+    }
+
+    .cadEntityTable td {
+        vertical-align: top;
+        padding: 5px;
+        border-right: 1px solid #d5dae3;
+        border-bottom: 1px solid #d5dae3;
+        background: #fff;
+    }
+
+    .cadEntityTable tbody tr:nth-child(even) td {
+        background: #f8fafc;
+    }
+
+    .cadEntityTable .cadRowNumber {
+        width: 35px;
+        text-align: center;
+    }
+
+    .cadEntityTable .cadTypeColumn {
+        width: 92px;
+    }
+
+    .cadEntityTable .cadLayerColumn {
+        width: 105px;
+    }
+
+    .cadEntityTable .cadGeometryColumn {
+        width: 300px;
+    }
+
+    .cadEntityTable .cadDetailsColumn {
+        width: 245px;
+    }
+
+    .cadEntityTable .cadStyleColumn {
+        width: 135px;
+    }
+
+    .cadEntityTable .cadActionsColumn {
+        width: 62px;
+        text-align: center;
+    }
+
+    .cadEntityTable input, .cadEntityTable select, .cadEntityTable textarea {
+        width: 100%;
+        min-width: 0;
+        border: 1px solid #b8c1d0;
+        border-radius: 2px;
+        padding: 4px;
+        background: #fff;
+        color: #1d2430;
+        font: 11px Segoe UI, Arial, sans-serif;
+    }
+
+    .cadEntityTable textarea {
+        min-height: 48px;
+        resize: vertical;
+    }
+
+        .cadEntityTable input:focus, .cadEntityTable select:focus, .cadEntityTable textarea:focus {
+            outline: 2px solid #2563d8;
+            outline-offset: -1px;
+        }
+
+.cadFieldGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+}
+
+    .cadFieldGrid label, .cadStyleFields label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        color: #657188;
+        font-size: 9px;
+    }
+
+.cadStyleFields {
+    display: grid;
+    gap: 4px;
+}
+
+.cadInlineCheck {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 4px !important;
+}
+
+    .cadInlineCheck input {
+        width: auto;
+    }
+
+.cadPointTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .cadPointTable th, .cadPointTable td {
+        position: static;
+        padding: 2px;
+        border: 0;
+        background: transparent !important;
+    }
+
+    .cadPointTable th {
+        font-size: 9px;
+    }
+
+    .cadPointTable .pointAction {
+        width: 24px;
+    }
+
+    .cadPointTable button {
+        padding: 1px 4px;
+    }
+
+.cadEmptyEntities {
+    padding: 18px !important;
+    color: #657188;
+    text-align: center;
+}
+
+.cadJson {
+    width: 100%;
+    min-height: 150px;
+    margin-top: 5px;
+    resize: vertical;
+    border: 1px solid #9da8ba;
+    padding: 5px;
+    font: 10px Consolas, monospace;
+    line-height: 1.35;
+}
+
+    .cadJson:focus {
+        outline: 2px solid #2563d8;
+        outline-offset: -1px;
+    }
+
+.cadEditorActions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+    .cadEditorActions select {
+        min-width: 0;
+    }
+
+.cadAdvanced {
+    margin-top: 7px;
+    border-top: 1px solid #d5dae3;
+    padding-top: 6px;
+}
+
+    .cadAdvanced summary {
+        cursor: pointer;
+        color: #52607a;
+        font-weight: 600;
+    }
+
+.cadGuide {
+    margin: 5px 0;
+    border: 1px solid #c6d2e5;
+    border-radius: 3px;
+    background: #eef5ff;
+    color: #3f4f68;
+}
+
+    .cadGuide summary {
+        padding: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #24518a;
+    }
+
+.cadGuideContent {
+    padding: 0 6px 6px;
+    line-height: 1.4;
+}
+
+    .cadGuideContent p {
+        margin: 4px 0;
+    }
+
+    .cadGuideContent code {
+        display: block;
+        margin: 3px 0;
+        padding: 3px;
+        background: #fff;
+        border: 1px solid #d6dfec;
+        color: #263b57;
+        font: 10px Consolas, monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+
+.cadFieldGuide {
+    margin: 5px 0 0;
+    padding-left: 17px;
+}
+
+.cadHelp {
+    margin: 5px 0;
+    color: #657188;
+    line-height: 1.35;
+}
+
+.cadStatus {
+    margin-top: 4px;
+    color: #52607a;
+    font-size: 10px;
+}
+
+.cadBlock:not(.expanded) .preview {
+    padding: 0;
+    cursor: default;
+}
+
+    .cadBlock:not(.expanded) .preview .cadCanvas {
+        height: 260px;
+        border: 0;
+    }
+
+.cadBlock.compactCad .cadCanvas {
+    height: 280px;
+}
+
+.cadBlock.compactCad .cadEntityTableWrap {
+    max-height: 300px;
+}
+
+/* Image Block Styling */
+.imageBlock .preview {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+.imageBlock.expanded {
+    display: flex;
+    flex-direction: column;
+}
+
+    .imageBlock.expanded .preview {
+        display: flex !important;
+        flex: 1;
+        height: auto;
+        min-height: 180px;
+        border-bottom: 1px solid #cbd2df;
+    }
+
+    .imageBlock.expanded .body {
+        display: block;
+        flex: 0 0 auto;
+        overflow-y: auto;
+        background: #fbfcfe;
+    }
+
+.imagePreviewTitle {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    padding: 4px;
+    background: #f4f6fa;
+    border-bottom: 1px solid #dce2ec;
+    flex: 0 0 auto;
+}
+
+.imagePreviewContainer {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #eceff4;
+}
+
+    .imagePreviewContainer img {
+        pointer-events: none;
+    }
+
+.imageEditor {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.imageEditorRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+    .imageEditorRow label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        font-size: 10px;
+        color: #52607a;
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .imageEditorRow input[type="text"],
+    .imageEditorRow input[type="number"],
+    .imageEditorRow select {
+        width: 100%;
+        border: 1px solid #bdc5d4;
+        padding: 4px;
+        border-radius: 3px;
+        font-family: inherit;
+        color: inherit;
+    }
+
+.imageEditor input[type="file"] {
+    font-size: 11px;
+    color: #52607a;
+}
+
+.handle {
+    padding-right: 26px;
+    cursor: move;
+}
+
+.body {
+    min-width: 0;
+    padding: 8px;
+    overflow: auto;
+}
+
+.calcLine {
+    display: grid;
+    grid-template-columns: minmax(68px, .7fr) minmax(110px, 1.5fr) minmax(76px, .8fr);
+    align-items: start;
+    gap: 6px;
+}
+
+.programBlock .calcLine {
+    grid-template-columns: minmax(110px, .8fr) minmax(140px, 1.2fr);
+}
+
+.calcLine input, .calcLine textarea {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.calcLine textarea {
+    min-height: 38px;
+    resize: vertical;
+}
+
+.calcSection {
+    margin: 0 0 10px;
+    padding: 7px;
+    border: 1px solid #d5dbe5;
+    border-radius: 4px;
+    background: #fbfcfe;
+}
+
+    .calcSection:last-child {
+        margin-bottom: 0;
+    }
+
+    .calcSection h3 {
+        margin: 0 0 6px;
+        color: #27344b;
+        font-size: 12px;
+    }
+
+.calcSectionHint {
+    margin: 0 0 6px;
+    color: #657188;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.calcSection .calcOptions {
+    margin-top: 0;
+}
+
+.calcReview {
+    background: #fff;
+}
+
+    .calcReview .result {
+        min-height: 28px;
+        padding: 3px 0;
+    }
+
+.calcBlock.expanded .calcSection h3, .calcBlock.expanded .calcSectionHint, .calcBlock.expanded .calcInputHeader label, .calcBlock.expanded .calcOptions label, .calcBlock.expanded .stepToggle {
+    font-family: inherit;
+}
+
+.calcBlock.expanded input, .calcBlock.expanded select, .calcBlock.expanded textarea {
+    font-family: inherit;
+    color: inherit;
+}
+
+.calcBlock.expanded .mathExpression {
+    font-family: inherit;
+}
+
+.stepToggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    max-width: 100%;
+    margin: 6px 0;
+    font: 11px Segoe UI, Arial, sans-serif;
+}
+
+    .stepToggle input {
+        flex: 0 0 auto;
+    }
+
+.result, .steps {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.mathExpression {
+    display: inline-flex;
+    align-items: center;
+    gap: .12em;
+    padding-top: .2em;
+    font-family: Cambria Math, Cambria, serif;
+    font-size: 1.08em;
+    line-height: 1.35;
+}
+
+    .mathExpression sup {
+        display: inline-block;
+        vertical-align: super;
+        align-self: flex-start;
+        font-size: .68em;
+        line-height: 1;
+        margin-left: .04em;
+        transform: translateY(-.18em);
+    }
+
+    .mathExpression sub {
+        display: inline-block;
+        vertical-align: baseline;
+        font-size: 0.68em;
+        line-height: 1;
+        margin-left: 0.04em;
+        transform: translateY(0.25em);
+    }
+
+.mathOperator {
+    display: inline-block;
+    margin: 0 .18em;
+}
+
+.mathFunction {
+    font-style: normal;
+}
+
+.frac {
+    display: inline-flex;
+    vertical-align: middle;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    line-height: 1.05;
+    margin: 0 .12em;
+}
+
+    .frac > span:first-child {
+        padding: 0 .22em .08em;
+        border-bottom: 1.4px solid currentColor;
+    }
+
+    .frac > span:last-child {
+        padding: .08em .22em 0;
+    }
+
+.radical {
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+.radicalSymbol {
+    font-size: 1.35em;
+    line-height: .9;
+}
+
+.radicand {
+    border-top: 1.4px solid currentColor;
+    padding: .03em .18em 0 .12em;
+}
+
+.integral {
+    display: inline-flex;
+    align-items: center;
+    gap: .14em;
+}
+
+.integralLimits {
+    display: grid;
+    grid-template-rows: minmax(.75em, auto) 1.55em minmax(.75em, auto);
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    line-height: 1;
+    margin: .05em .08em;
+}
+
+    .integralLimits > .integralLimit:first-child {
+        grid-row: 1;
+    }
+
+.integralSymbol {
+    grid-row: 2;
+    font-size: 2.2em;
+    line-height: .7;
+}
+
+.integralLimits > .integralLimit:last-child {
+    grid-row: 3;
+}
+
+.integralLimit {
+    font-size: .68em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.evalAt {
+    font-size: .72em;
+    align-self: flex-end;
+    margin-left: .12em;
+}
+
+.result .mathExpression, .previewText .mathExpression {
+    font-size: 1.15em;
+}
+
+.steps .mathExpression {
+    font-size: 1em;
+}
+
+.stepLine {
+    display: flex;
+    align-items: flex-start;
+    gap: .45em;
+    margin-top: .25em;
+    max-width: 100%;
+}
+
+    .stepLine .mathExpression {
+        min-width: 0;
+        overflow-x: auto;
+    }
+
+.stepLabel {
+    flex: 0 0 68px;
+    color: #657188;
+    font: 600 11px Segoe UI, Arial, sans-serif;
+}
+
+.programModeBar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 7px 0;
+    color: #52607a;
+    font-size: 11px;
+}
+
+    .programModeBar strong {
+        margin-right: auto;
+        color: #27344b;
+    }
+
+.programTableWrap {
+    max-width: 100%;
+    overflow: auto;
+    border: 1px solid #bdc5d4;
+}
+
+.programTable {
+    width: 100%;
+    min-width: 1140px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+    .programTable th {
+        padding: 5px;
+        border-right: 1px solid #c9d0dc;
+        border-bottom: 1px solid #aeb8c9;
+        background: #e9edf4;
+        color: #52607a;
+        font-size: 10px;
+        text-align: left;
+    }
+
+    .programTable td {
+        vertical-align: top;
+        padding: 5px;
+        border-right: 1px solid #d5dae3;
+        border-bottom: 1px solid #d5dae3;
+    }
+
+    .programTable tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .programTable th:last-child, .programTable td:last-child {
+        border-right: 0;
+    }
+
+    .programTable .programTypeColumn {
+        width: 155px;
+    }
+
+    .programTable .programCommentColumn {
+        width: 180px;
+    }
+
+    .programTable .programActionColumn {
+        width: 62px;
+    }
+
+.programField {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: #657188;
+    font-size: 9px;
+}
+
+    .programField input {
+        width: 100%;
+        min-width: 120px;
+        border: 1px solid #b8c1d0;
+        padding: 4px;
+        color: #1d2430;
+        font: 11px Consolas, monospace;
+    }
+
+.programCommentColumn input {
+    font-family: Segoe UI, Arial, sans-serif;
+}
+
+.programEmptyField {
+    color: #a2aaba;
+    text-align: center;
+}
+
+.programAddBar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+    .programAddBar select {
+        min-width: 170px;
+    }
+
+.programHelp {
+    margin: 5px 0;
+    color: #657188;
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+.programCode {
+    display: block;
+    width: 100%;
+    min-height: 135px;
+    margin-top: 5px;
+    resize: vertical;
+    font: 11px Consolas, monospace;
+}
+
+.programGeneratedCode {
+    max-height: 100px;
+    margin: 5px 0;
+    overflow: auto;
+    border: 1px solid #d5dae3;
+    background: #f7f9fc;
+    padding: 5px;
+    color: #52607a;
+    font: 10px Consolas, monospace;
+    white-space: pre-wrap;
+}
+
+.derivationHeader {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 7px;
+}
+
+    .derivationHeader strong {
+        margin-right: auto;
+        color: #27344b;
+    }
+
+    .derivationHeader label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #52607a;
+        font-size: 11px;
+    }
+
+.derivationIntro {
+    margin: 4px 0 8px;
+    color: #52607a;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.derivationSteps {
+    display: grid;
+    gap: 7px;
+}
+
+.derivationStep {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 7px;
+    border-left: 3px solid #4d83dd;
+    background: #f6f9fd;
+    padding: 7px;
+}
+
+.derivationStepNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: #dbe9ff;
+    color: #174d89;
+    font: 700 11px Segoe UI, Arial, sans-serif;
+}
+
+.derivationStepBody {
+    min-width: 0;
+}
+
+.derivationStepTitle {
+    display: block;
+    margin-bottom: 3px;
+    color: #27344b;
+    font: 600 11px Segoe UI, Arial, sans-serif;
+}
+
+.derivationFormula {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.derivationExplanation {
+    margin: 4px 0 0;
+    color: #52607a;
+    font: 11px/1.4 Segoe UI, Arial, sans-serif;
+}
+
+.derivationNote {
+    margin-top: 8px;
+    border: 1px solid #e2c675;
+    background: #fff9df;
+    padding: 6px;
+    color: #65531b;
+    font: 10px/1.4 Segoe UI, Arial, sans-serif;
+}
+
+.derivationBlock:not(.expanded) .preview {
+    max-height: 260px;
+    overflow: auto;
+    cursor: default;
+}
+
+.derivationBlock:not(.expanded) .derivationHeader {
+    display: none;
+}
+
+.derivationBlock:not(.expanded) .derivationSteps {
+    gap: 5px;
+}
+
+.equationModeBar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 7px;
+}
+
+    .equationModeBar strong {
+        margin-right: auto;
+        color: #27344b;
+    }
+
+    .equationModeBar label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #52607a;
+        font-size: 11px;
+    }
+
+.equationGuide {
+    margin: 0 0 8px;
+    border: 1px solid #c6d2e5;
+    border-radius: 3px;
+    background: #eef5ff;
+    color: #3f4f68;
+    font: 10px/1.4 Segoe UI, Arial, sans-serif;
+}
+
+    .equationGuide summary {
+        padding: 6px;
+        cursor: pointer;
+        color: #24518a;
+        font-weight: 600;
+    }
+
+.equationGuideContent {
+    padding: 0 7px 7px;
+}
+
+    .equationGuideContent p {
+        margin: 3px 0;
+    }
+
+    .equationGuideContent code {
+        font-family: Consolas, monospace;
+    }
+
+.equationStepEditor {
+    display: grid;
+    gap: 7px;
+}
+
+.equationStepRow {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) 58px;
+    gap: 6px;
+    border-left: 3px solid #4d83dd;
+    background: #f6f9fd;
+    padding: 7px;
+}
+
+.equationStepNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: #dbe9ff;
+    color: #174d89;
+    font: 700 11px Segoe UI, Arial, sans-serif;
+}
+
+.equationStepFields {
+    display: grid;
+    grid-template-columns: minmax(110px, .7fr) minmax(150px, 1.3fr);
+    gap: 5px;
+    min-width: 0;
+}
+
+    .equationStepFields label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+        color: #52607a;
+        font: 10px Segoe UI, Arial, sans-serif;
+    }
+
+        .equationStepFields label:last-child {
+            grid-column: 1/-1;
+        }
+
+    .equationStepFields input {
+        width: 100%;
+        min-width: 0;
+        border: 1px solid #b8c1d0;
+        padding: 5px;
+        background: #fff;
+        color: #1d2430;
+    }
+
+.equationStepActions {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+    .equationStepActions button {
+        padding: 3px;
+        font-size: 10px;
+    }
+
+.equationAddBar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 7px;
+    color: #657188;
+    font: 10px Segoe UI, Arial, sans-serif;
+}
+
+.guidedEquationPreview {
+    display: grid;
+    gap: 6px;
+}
+
+    .guidedEquationPreview .derivationStep {
+        padding: 6px;
+    }
+
+.equationBlock:not(.expanded) .guidedEquationPreview {
+    font-family: Segoe UI, Arial, sans-serif;
+    font-size: 12px;
+    cursor: default;
+}
+
+    .equationBlock:not(.expanded) .guidedEquationPreview .mathExpression {
+        font-family: Cambria Math, Cambria, serif;
+        font-size: 16px;
+    }
+
+    .equationBlock:not(.expanded) .guidedEquationPreview .derivationExplanation {
+        font-size: 10px;
+    }
+
+.automaticEquationHeader {
+    margin-bottom: 9px;
+}
+
+    .automaticEquationHeader h2 {
+        margin: 0 0 4px;
+        color: #27344b;
+        font-size: 15px;
+    }
+
+    .automaticEquationHeader p {
+        margin: 0;
+        color: #52607a;
+        font: 11px/1.45 Segoe UI, Arial, sans-serif;
+    }
+
+.automaticEquationSteps {
+    display: grid;
+    gap: 7px;
+}
+
+.automaticEquationTile {
+    border: 1px solid #c6d2e5;
+    border-left: 4px solid #4d83dd;
+    border-radius: 3px;
+    background: #fff;
+    overflow: hidden;
+}
+
+    .automaticEquationTile.derived {
+        border-left-color: #2b9b72;
+    }
+
+.automaticEquationTileToggle {
+    display: grid;
+    grid-template-columns: 24px 28px minmax(0, 1fr);
+    align-items: start;
+    gap: 6px;
+    width: 100%;
+    border: 0;
+    background: #f6f9fd;
+    padding: 7px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.automaticEquationTile.derived .automaticEquationTileToggle {
+    background: #f3fbf7;
+}
+
+.automaticEquationSign {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #7f91ab;
+    border-radius: 3px;
+    background: #fff;
+    color: #24518a;
+    font: bold 15px/1 Segoe UI, Arial, sans-serif;
+}
+
+.automaticEquationSummary {
+    min-width: 0;
+}
+
+    .automaticEquationSummary strong {
+        display: block;
+        margin-bottom: 3px;
+        color: #27344b;
+        font: 600 11px Segoe UI, Arial, sans-serif;
+    }
+
+    .automaticEquationSummary .mathExpression {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+.automaticEquationDetails {
+    border-top: 1px solid #d5dbe5;
+    background: #fff;
+    padding: 8px 10px 9px 64px;
+}
+
+.automaticEquationDetailLabel {
+    margin: 6px 0 3px;
+    color: #657188;
+    font: 700 9px Segoe UI, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+    .automaticEquationDetailLabel:first-child {
+        margin-top: 0;
+    }
+
+.automaticEquationSource {
+    margin: 3px 0;
+    border-left: 2px solid #9bb2d4;
+    background: #f7f9fc;
+    padding: 5px;
+    overflow-x: auto;
+}
+
+.automaticEquationOperation {
+    color: #24518a;
+    font: 600 11px/1.4 Segoe UI, Arial, sans-serif;
+}
+
+.automaticEquationArrow {
+    margin: 5px 0;
+    color: #2b9b72;
+    font: bold 14px Segoe UI, Arial, sans-serif;
+}
+
+.automaticEquationExplanation {
+    margin: 5px 0 0;
+    color: #52607a;
+    font: 11px/1.45 Segoe UI, Arial, sans-serif;
+}
+
+.equationDerivePanel {
+    margin: 0 0 9px;
+    border: 1px solid #aebbd0;
+    border-radius: 4px;
+    background: #f7f9fc;
+    padding: 7px;
+}
+
+    .equationDerivePanel h3 {
+        margin: 0 0 6px;
+        color: #27344b;
+        font: 600 11px Segoe UI, Arial, sans-serif;
+    }
+
+.equationDeriveControls {
+    display: grid;
+    grid-template-columns: minmax(125px, .75fr) minmax(180px, 1.5fr) auto;
+    align-items: end;
+    gap: 6px;
+}
+
+    .equationDeriveControls label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+        color: #52607a;
+        font: 10px Segoe UI, Arial, sans-serif;
+    }
+
+    .equationDeriveControls input, .equationDeriveControls select {
+        width: 100%;
+        min-width: 0;
+        border: 1px solid #b8c1d0;
+        padding: 5px;
+        background: #fff;
+    }
+
+.equationDeriveHint {
+    margin: 5px 0 0;
+    color: #657188;
+    font: 10px/1.4 Segoe UI, Arial, sans-serif;
+}
+
+.equationDeriveError {
+    margin: 6px 0 0;
+    border-left: 3px solid #b42318;
+    background: #fff1f0;
+    padding: 6px;
+    color: #8f1d16;
+    font: 10px/1.4 Segoe UI, Arial, sans-serif;
+}
+
+.equationGenerated {
+    margin-top: 8px;
+    border-top: 1px solid #cbd4e1;
+    padding-top: 7px;
+}
+
+.equationGeneratedHeader {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 6px;
+}
+
+    .equationGeneratedHeader strong {
+        margin-right: auto;
+        color: #24518a;
+        font: 600 11px Segoe UI, Arial, sans-serif;
+    }
+
+.equationGeneratedNotice {
+    margin: 0 0 6px;
+    color: #52607a;
+    font: 10px/1.4 Segoe UI, Arial, sans-serif;
+}
+
+.equationGenerated .guidedEquationPreview {
+    max-height: 360px;
+    overflow: auto;
+    border: 1px solid #d5dbe5;
+    background: #fff;
+    padding: 6px;
+}
+
+.equationGenerated .derivationStep {
+    border-left-color: #2b9b72;
+    background: #f3fbf7;
+}
+
+.equationWorkflowIntro {
+    margin: 0 0 7px;
+    color: #52607a;
+    font: 10px/1.45 Segoe UI, Arial, sans-serif;
+}
+
+.equationWorkflowSteps {
+    display: grid;
+    gap: 6px;
+}
+
+.equationWorkflowStep {
+    display: grid;
+    grid-template-columns: 25px minmax(0, 1fr);
+    gap: 6px;
+    border: 1px solid #d5dbe5;
+    border-radius: 3px;
+    background: #fff;
+    padding: 6px;
+}
+
+.equationWorkflowNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #24518a;
+    color: #fff;
+    font: 700 11px Segoe UI, Arial, sans-serif;
+}
+
+.equationWorkflowBody {
+    min-width: 0;
+}
+
+    .equationWorkflowBody > strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #27344b;
+        font: 600 10px Segoe UI, Arial, sans-serif;
+    }
+
+    .equationWorkflowBody .equationDeriveControls {
+        grid-template-columns: minmax(130px, .8fr) minmax(180px, 1.4fr) auto;
+    }
+
+.equationWorkflowSourceNote {
+    margin: 4px 0 0;
+    color: #657188;
+    font: 9px/1.35 Segoe UI, Arial, sans-serif;
+}
+
+.equationGeneratedActions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+    .equationGeneratedActions button:first-of-type {
+        border-color: #24734f;
+        background: #eaf8f0;
+        color: #185a3d;
+        font-weight: 600;
+    }
+
+.equationStepActions .useEquationSource {
+    border-color: #4d83dd;
+    background: #eef5ff;
+    color: #24518a;
+}
+
+.block :where(input,textarea,select,button,label,th,td,.handle,.body,.preview,.result,.steps,.mathExpression,.matrixTable,.matrixUnit,.matrixStepLabel,.tablePreviewTitle,.tablePreviewOperation,.stepToggle,.stepLabel,.plotOptions,.plotActions) {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    text-decoration: inherit;
+}
+
+.block.calcBlock * {
+    font-family: inherit !important;
+}
+
+.selectionMarquee {
+    position: absolute;
+    z-index: 20;
+    border: 1px solid #2563d8;
+    background: #8bb5ff33;
+    pointer-events: none;
+}
+
+.textStyleBar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 6px;
+    color: #52607a;
+    font-size: 11px;
+}
+
+    .textStyleBar select {
+        min-width: 125px;
+    }
+
+.textEditor {
+    width: 100%;
+    min-height: 70px;
+    border: 1px solid #bdc5d4;
+    border-radius: 3px;
+    padding: 7px;
+    resize: vertical;
+}
+
+    .textEditor.heading1 {
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .textEditor.heading2 {
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 1.25;
+    }
+
+    .textEditor.heading3 {
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+.textPreview {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+    .textPreview.heading1 {
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .textPreview.heading2 {
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 1.25;
+    }
+
+    .textPreview.heading3 {
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+.tocDetails summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+    .tocDetails summary::-webkit-details-marker {
+        display: none;
+    }
+
+.tocBlock:not(.expanded) .preview {
+    overflow: hidden;
+    max-height: none;
+}
+
+.tocHeader {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 7px;
+}
+
+    .tocHeader strong {
+        margin-right: auto;
+    }
+
+.tocEntries {
+    display: grid;
+    gap: 4px;
+}
+
+.tocEntry {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 22px;
+    border: 0;
+    background: transparent;
+    color: #24518a;
+    text-align: left;
+    cursor: pointer;
+}
+
+    .tocEntry span {
+        margin-right: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .tocEntry small {
+        margin-left: 8px;
+        white-space: nowrap;
+    }
+
+    .tocEntry.level2 {
+        padding-left: 18px;
+    }
+
+    .tocEntry.level3 {
+        padding-left: 36px;
+    }
+
+.tocEmpty {
+    color: #657188;
+    font-size: 11px;
+}
+
+.canvasQuickEntry {
+    position: absolute;
+    z-index: 30;
+    width: 340px;
+    border: 2px solid #2563d8;
+    border-radius: 4px;
+    background: #fff;
+    padding: 7px;
+    box-shadow: 0 5px 18px #1116;
+}
+
+    .canvasQuickEntry input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        font: 15px Segoe UI, Arial, sans-serif;
+    }
+
+.canvasQuickHint {
+    margin-top: 4px;
+    color: #657188;
+    font-size: 10px;
+}
+
+.shapeBlock {
+    min-width: 40px;
+    min-height: 40px;
+    overflow: visible !important;
+    border-color: transparent;
+    background: transparent !important;
+    box-shadow: none;
+}
+
+    .shapeBlock.selected {
+        border: 1px dashed #2563d8;
+        box-shadow: none;
+    }
+
+    .shapeBlock .preview {
+        display: block !important;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        padding: 0;
+        overflow: visible;
+        cursor: move;
+    }
+
+    .shapeBlock.expanded {
+        min-width: 250px;
+        min-height: 210px;
+        background: #ffffffeb !important;
+    }
+
+        .shapeBlock.expanded .preview {
+            display: none !important;
+        }
+
+    .shapeBlock:not(.expanded) .handle {
+        display: block;
+        position: absolute;
+        z-index: 7;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 20px;
+        padding: 0;
+        background: transparent;
+        color: transparent;
+        font-size: 0;
+    }
+
+    .shapeBlock:not(.expanded) .close {
+        display: none;
+        font-size: 14px;
+    }
+
+    .shapeBlock:not(.expanded).selected .close {
+        display: block;
+    }
+
+.shapeSvg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform-origin: center;
+    pointer-events: none;
+}
+
+.shapeEditor {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(90px, 1fr));
+    gap: 7px;
+}
+
+    .shapeEditor label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        color: #52607a;
+        font-size: 10px;
+    }
+
+    .shapeEditor input, .shapeEditor select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .shapeEditor .shapeChecks {
+        grid-column: 1/-1;
+        display: flex;
+        gap: 12px;
+    }
+
+        .shapeEditor .shapeChecks label {
+            flex-direction: row;
+            align-items: center;
+            font-size: 11px;
+        }
+
+        .shapeEditor .shapeChecks input {
+            width: auto;
+        }
+
+.rotateHandle {
+    display: none;
+    position: absolute;
+    z-index: 9;
+    left: 50%;
+    top: -27px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #2563d8;
+    border-radius: 50%;
+    background: #fff;
+    cursor: grab;
+    transform: translateX(-50%);
+}
+
+    .rotateHandle:after {
+        position: absolute;
+        left: 7px;
+        top: 16px;
+        width: 2px;
+        height: 10px;
+        background: #2563d8;
+        content: "";
+    }
+
+.shapeBlock.selected:not(.expanded) .rotateHandle {
+    display: block;
+}
+
+.reading-mode .rotateHandle, .presentation-mode .rotateHandle {
+    display: none !important;
+}
+
+.pageHeader, .pageFooter, .pageNumber {
+    position: absolute;
+}
+
+#workspace {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+#pageSidebar {
+    --page-sidebar-width: 220px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 var(--page-sidebar-width);
+    min-width: 0;
+    border-right: 1px solid #52607a;
+    background: #20283a;
+    color: #e5eaf4;
+    transition: flex-basis .18s ease;
+}
+
+    #pageSidebar.collapsed {
+        flex-basis: 30px;
+    }
+
+.pageSidebarContent {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.sidebarTabHeader {
+    display: flex;
+    align-items: center;
+    min-height: 38px;
+    background: #1b2235;
+    border-bottom: 1px solid #46516a;
+}
+
+    .sidebarTabHeader button.tabBtn {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: #a2acbd;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 11px 0;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+    }
+
+        .sidebarTabHeader button.tabBtn.active {
+            color: #fff;
+            border-bottom: 2px solid #8bb5ff;
+            background: #20283a;
+        }
+
+        .sidebarTabHeader button.tabBtn:hover:not(.active) {
+            color: #e5eaf4;
+            background: #303b53;
+        }
+
+    .sidebarTabHeader .collapseBtn {
+        flex: 0 0 27px;
+        height: 25px;
+        margin: 0 6px;
+        border: 1px solid #64718d;
+        border-radius: 3px;
+        background: #303b53;
+        color: #fff;
+        cursor: pointer;
+    }
+
+        .sidebarTabHeader .collapseBtn:hover {
+            background: #46516a;
+        }
+
+.projectList {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+    font-size: 12px;
+    color: #e5eaf4;
+}
+
+.projectSection {
+    margin-bottom: 12px;
+}
+
+.projectSectionTitle {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #8bb5ff;
+    padding: 4px 12px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+    .projectSectionTitle:hover {
+        background: #303b53;
+    }
+
+.projectItem {
+    padding: 6px 12px 6px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    .projectItem:hover {
+        background: #303b53;
+    }
+
+    .projectItem.pinned {
+        padding-left: 12px;
+    }
+
+.projectItemIcon {
+    color: #a2acbd;
+    font-size: 14px;
+}
+
+.pageSidebarHeader button, .pageSidebarTools button {
+    border: 1px solid #64718d;
+    border-radius: 3px;
+    background: #303b53;
+    color: #fff;
+    cursor: pointer;
+}
+
+.pageSidebarHeader button {
+    width: 27px;
+    height: 25px;
+}
+
+.pageSidebarRail {
+    display: none;
+    flex: 1;
+    width: 30px;
+    border: 0;
+    border-radius: 0;
+    background: #273247;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+    .pageSidebarRail:hover {
+        background: #303b53;
+    }
+
+.pageSidebarTools {
+    display: flex;
+    gap: 5px;
+    padding: 7px;
+    border-bottom: 1px solid #46516a;
+}
+
+    .pageSidebarTools input {
+        flex: 1;
+        min-width: 0;
+        border: 1px solid #75809a;
+        border-radius: 3px;
+        background: #fff;
+        padding: 5px 6px;
+        color: #1d2430;
+    }
+
+    .pageSidebarTools button {
+        flex: 0 0 29px;
+        font-size: 17px;
+    }
+
+#pagePreviewList {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: 8px;
+}
+
+.pagePreviewCard {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #596681;
+    border-radius: 4px;
+    background: #2a344a;
+    padding: 6px;
+    cursor: pointer;
+    touch-action: pan-y;
+}
+
+    .pagePreviewCard:hover {
+        border-color: #8bb5ff;
+    }
+
+    .pagePreviewCard.active {
+        border: 2px solid #66a0ff;
+        background: #33415c;
+        padding: 5px;
+    }
+
+    .pagePreviewCard.dragging {
+        opacity: .45;
+    }
+
+    .pagePreviewCard.dropBefore {
+        box-shadow: 0 -3px #66a0ff;
+    }
+
+    .pagePreviewCard.dropAfter {
+        box-shadow: 0 3px #66a0ff;
+    }
+
+.pagePreviewHeader {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+    .pagePreviewHeader span {
+        min-width: 0;
+        flex: 1;
+        overflow: hidden;
+        color: #e5eaf4;
+        font-size: 11px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .pagePreviewHeader button {
+        border: 0;
+        background: transparent;
+        color: #e7a5ad;
+        font-size: 15px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+.pageThumbnail {
+    --page-background: #fff;
+    --page-grid-color: #edf0f5;
+    --page-thumbnail-grid-spacing: 4px;
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+    border: 1px solid #aeb8c9;
+    background-color: var(--page-background);
+    background-image: linear-gradient(var(--page-grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--page-grid-color) 1px, transparent 1px);
+    background-size: var(--page-thumbnail-grid-spacing) var(--page-thumbnail-grid-spacing);
+    box-shadow: 0 2px 7px #10152288;
+}
+
+    .pageThumbnail.pageGridHidden {
+        background-image: none;
+    }
+
+.pageThumbnailBlock {
+    position: absolute;
+    min-width: 4px;
+    min-height: 3px;
+    overflow: hidden;
+    border: 1px solid #8c99ae;
+    border-radius: 1px;
+    background: #f8fafcee;
+    color: #33415c;
+    font-size: 3px;
+    line-height: 1.15;
+    white-space: pre-wrap;
+}
+
+    .pageThumbnailBlock.plot {
+        background: #edf5ff;
+    }
+
+    .pageThumbnailBlock.equation {
+        background: #fff8e8;
+    }
+
+    .pageThumbnailBlock.cad {
+        background: #1d2735;
+        color: #8ce1c0;
+    }
+
+    .pageThumbnailBlock.table {
+        background: #f2edff;
+    }
+
+.pageInsertBetween {
+    display: flex;
+    align-items: center;
+    height: 18px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: opacity .12s;
+}
+
+    .pageInsertBetween:before, .pageInsertBetween:after {
+        height: 1px;
+        flex: 1;
+        background: #64718d;
+        content: "";
+    }
+
+    .pageInsertBetween button {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #8bb5ff;
+        border-radius: 50%;
+        background: #303b53;
+        color: #fff;
+        font-size: 15px;
+        line-height: 16px;
+        cursor: pointer;
+    }
+
+    .pageInsertBetween:hover, .pagePreviewCard:hover + .pageInsertBetween {
+        opacity: 1;
+    }
+
+.pageDropBoundary {
+    height: 14px;
+    margin: 0 auto;
+    transition: background .12s;
+}
+
+    .pageDropBoundary.dropTarget {
+        border-radius: 3px;
+        background: #66a0ff;
+    }
+
+.pagePreviewEmpty {
+    padding: 18px 6px;
+    color: #aeb8c9;
+    font-size: 11px;
+    text-align: center;
+}
+
+.pageSidebarResizeHandle {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: -4px;
+    bottom: 0;
+    width: 8px;
+    cursor: col-resize;
+    touch-action: none;
+}
+
+    .pageSidebarResizeHandle:hover, .pageSidebarResizeHandle:focus {
+        background: #66a0ff88;
+        outline: 0;
+    }
+
+.collapsed .pageSidebarContent, .collapsed .sidebarTabHeader, .collapsed .pageSidebarResizeHandle {
+    display: none !important;
+}
+
+.collapsed .pageSidebarRail {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.status {
+    pointer-events: none;
+}
+
+@media(max-width:900px) {
+    #pageSidebar {
+        --page-sidebar-width: 188px;
+    }
+}
+
+.pageReordering, .pageReordering * {
+    cursor: grabbing !important;
+    user-select: none !important;
+}
+
+.canvasPageInsert {
+    position: absolute;
+    z-index: 12;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity .12s;
+}
+
+    .canvasPageInsert:before {
+        position: absolute;
+        right: 0;
+        left: 0;
+        height: 2px;
+        background: #66a0ff;
+        content: "";
+    }
+
+    .canvasPageInsert:hover, .canvasPageInsert:focus-within {
+        opacity: 1;
+    }
+
+    .canvasPageInsert button {
+        position: relative;
+        width: 27px;
+        height: 27px;
+        border: 1px solid #3f78c8;
+        border-radius: 50%;
+        background: #eaf2ff;
+        color: #174d89;
+        font-size: 20px;
+        line-height: 22px;
+        cursor: pointer;
+        box-shadow: 0 2px 6px #15203355;
+    }
+
+        .canvasPageInsert button:focus {
+            outline: 2px solid #2563d8;
+            outline-offset: 2px;
+        }
+
+.pageLayoutToolbar label.inlineOption {
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    align-self: center;
+    color: #e5eaf4;
+    font-size: 11px;
+}
+
+    .pageLayoutToolbar label.inlineOption input {
+        width: auto;
+        min-width: 0;
+    }
+
+.viewModeBar button[aria-pressed=true] {
+    border-color: #4d83dd;
+    background: #dbe9ff;
+    color: #174d89;
+    font-weight: 600;
+}
+
+.gridSettings input[type=range] {
+    width: 105px;
+}
+
+.gridSettings output {
+    min-width: 28px;
+    color: #52607a;
+    font-size: 11px;
+}
+
+.presentationControls {
+    position: fixed;
+    z-index: 300;
+    right: 18px;
+    bottom: 18px;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #64718d;
+    border-radius: 5px;
+    background: #20283aee;
+    padding: 7px;
+    box-shadow: 0 4px 16px #10152299;
+    color: #fff;
+}
+
+    .presentationControls button {
+        min-width: 34px;
+        min-height: 30px;
+        border: 1px solid #7d8ba5;
+        border-radius: 3px;
+        background: #303b53;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .presentationControls .presentationPage {
+        min-width: 72px;
+        text-align: center;
+        font-size: 12px;
+    }
+
+.reading-mode header.ribbon, .reading-mode #pageSidebar, .presentation-mode header.ribbon, .presentation-mode #pageSidebar {
+    display: none;
+}
+
+.reading-mode .canvasPageInsert, .reading-mode .pageLabel, .reading-mode .pageMarginGuide, .reading-mode .close, .reading-mode .resizeHandle, .presentation-mode .canvasPageInsert, .presentation-mode .pageLabel, .presentation-mode .pageMarginGuide, .presentation-mode .close, .presentation-mode .resizeHandle {
+    display: none !important;
+}
+
+.reading-mode .block, .presentation-mode .block {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+    .reading-mode .block.selected, .presentation-mode .block.selected {
+        border-color: transparent;
+        box-shadow: none;
+    }
+
+    .reading-mode .block, .reading-mode .block *, .presentation-mode .block, .presentation-mode .block * {
+        cursor: default !important;
+    }
+
+.reading-mode #viewport {
+    padding: 24px;
+}
+
+.presentation-mode #viewport {
+    padding: 18px;
+    overflow: hidden;
+}
+
+.reading-mode .presentationControls, .presentation-mode .presentationControls {
+    display: flex;
+}
+
+    .reading-mode .presentationControls button:not(:last-child), .reading-mode .presentationPage {
+        display: none;
+    }
+
+.presentation-mode .presentationHidden {
+    display: none !important;
+}
+
+.presentation-mode .page.presentationActive {
+    box-shadow: 0 5px 28px #000b;
+}
+
+.shapePicker {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+    .shapePicker select {
+        min-width: 105px;
+    }
+
+@media print {
+    @page {
+        margin: 0;
+    }
+
+    html, body {
+        width: auto;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+        body.printing > header, body.printing > #workspace, body.printing > .status, body.printing > .fileTabsContainer, body.printing > .presentationControls, body.printing > .tabContextMenu, body.printing > .inline-calc-popup {
+            display: none !important;
+        }
+
+        body.printing > #printRoot {
+            display: block;
+        }
+
+    .printSheet {
+        position: relative;
+        margin: 0;
+        overflow: hidden;
+        break-after: page;
+        page-break-after: always;
+        background: #fff;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+        .printSheet:last-child {
+            break-after: auto;
+            page-break-after: auto;
+        }
+
+        .printSheet > .page {
+            left: 0 !important;
+            top: 0 !important;
+            box-shadow: none;
+        }
+
+        .printSheet .pageLabel, .printSheet .pageMarginGuide, .printSheet .close, .printSheet .resizeHandle {
+            display: none !important;
+        }
+
+        .printSheet .pageHeader:empty:after, .printSheet .pageFooter:empty:after {
+            content: none;
+        }
+
+        .printSheet > .block {
+            box-shadow: none;
+        }
+
+            .printSheet > .block.selected {
+                border: 1px solid #aab4c5;
+                box-shadow: none;
+            }
+}
+
+/* COMMENTS SYSTEM CSS */
+#commentSidebar {
+    width: 320px;
+    flex: 0 0 320px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #52607a;
+    background: #20283a;
+    color: #e5eaf4;
+    z-index: 50;
+}
+
+    #commentSidebar.collapsed {
+        display: none !important;
+    }
+
+.commentSidebarContent {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.commentSidebarHeader {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 38px;
+    padding: 6px 7px;
+    border-bottom: 1px solid #46516a;
+}
+
+    .commentSidebarHeader strong {
+        margin-right: auto;
+        font-size: 13px;
+    }
+
+    .commentSidebarHeader button {
+        border: 1px solid #64718d;
+        border-radius: 3px;
+        background: #303b53;
+        color: #fff;
+        cursor: pointer;
+        width: 27px;
+        height: 25px;
+    }
+
+.commentList {
+    flex: 1;
+    overflow: auto;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.commentThread {
+    background: #2a344a;
+    border: 1px solid #596681;
+    border-radius: 4px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+    .commentThread.completed {
+        opacity: 0.5;
+    }
+
+.commentContext {
+    font-size: 11px;
+    color: #8bb5ff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+    .commentContext span {
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+        .commentContext span:hover {
+            text-decoration: underline;
+        }
+
+.commentMessage {
+    background: #151b25;
+    border-radius: 3px;
+    padding: 6px;
+    font-size: 12px;
+    word-wrap: break-word;
+}
+
+.commentTimestamp {
+    font-size: 9px;
+    color: #a2acbd;
+    text-align: right;
+    margin-top: 3px;
+}
+
+.commentInputRow {
+    display: flex;
+    gap: 5px;
+    margin-top: 2px;
+}
+
+    .commentInputRow input {
+        flex: 1;
+        min-width: 0;
+        background: #fff;
+        border: 1px solid #75809a;
+        border-radius: 3px;
+        padding: 4px;
+        color: #1d2430;
+        font-size: 11px;
+    }
+
+    .commentInputRow button {
+        background: #2563d8;
+        color: #fff;
+        border: 1px solid #174d89;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 0 8px;
+        font-size: 11px;
+    }
+
+.commentStatusBtn {
+    background: none;
+    border: none;
+    color: #e5eaf4;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    margin-left: 5px;
+}
+
+    .commentStatusBtn:hover {
+        color: #fff;
+    }
+
+.commentReplies {
+    border-left: 2px solid #52607a;
+    padding-left: 8px;
+    margin-left: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.commentActionBtn {
+    background: none;
+    border: none;
+    color: #8bb5ff;
+    cursor: pointer;
+    font-size: 9px;
+    padding: 0 4px;
+    margin-left: 2px;
+    opacity: 0.7;
+}
+
+    .commentActionBtn:hover {
+        opacity: 1;
+        text-decoration: underline;
+        color: #fff;
+    }
+
+/* INLINE CALC POPUP CSS */
+.inline-calc-popup {
+    position: fixed;
+    z-index: 1000;
+    background: #ffffffeb;
+    border: 1px solid #aab4c5;
+    border-radius: 5px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    width: 250px;
+    backdrop-filter: blur(8px);
+}
+
+.inline-calc-popup-header {
+    background: linear-gradient(135deg, #1b2235, #2c3854);
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: move;
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    touch-action: none;
+}
+
+.inline-calc-popup-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+    .inline-calc-popup-body label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #52607a;
+        font-size: 11px;
+    }
+
+    .inline-calc-popup-body input[type="text"],
+    .inline-calc-popup-body input[type="number"],
+    .inline-calc-popup-body select {
+        width: 105px;
+        border: 1px solid #bdc5d4;
+        border-radius: 3px;
+        padding: 3px 5px;
+        font: 11px Segoe UI, Arial, sans-serif;
+        color: #1d2430;
+    }
+
+/* FILE TABS CSS */
+.fileTabsContainer {
+    display: flex;
+    align-items: stretch;
+    background: #1b2235;
+    border-bottom: 1px solid #000;
+    width: 100%;
+}
+
+.fileTabsScrollBtn {
+    background: transparent;
+    border: none;
+    color: #a2acbd;
+    cursor: pointer;
+    padding: 0 12px;
+    font-size: 12px;
+    outline: none;
+    display: none;
+    flex-shrink: 0;
+    border-right: 1px solid #101522;
+    border-left: 1px solid #101522;
+}
+
+    .fileTabsScrollBtn:hover {
+        background: #303b53;
+        color: #fff;
+    }
+
+.fileTabsBar {
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    min-width: 0;
+}
+
+    .fileTabsBar::-webkit-scrollbar {
+        display: none;
+    }
+
+.fileTab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: #273044;
+    color: #a2acbd;
+    font-size: 12px;
+    border-right: 1px solid #101522;
+    cursor: pointer;
+    user-select: none;
+    border-top: 2px solid transparent;
+    min-width: 100px;
+    max-width: 200px;
+}
+
+    .fileTab.active {
+        background: #f4f6fa;
+        color: #1d2430;
+        border-top-color: #2563d8;
+    }
+
+    .fileTab:hover:not(.active) {
+        background: #303b53;
+        color: #fff;
+    }
+
+    .fileTab span.tabTitle {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        pointer-events: none;
+    }
+
+    .fileTab .closeTab {
+        color: #a2acbd;
+        font-size: 14px;
+        line-height: 1;
+        padding: 0 4px;
+        border-radius: 3px;
+    }
+
+        .fileTab .closeTab:hover {
+            background: #e7a5ad;
+            color: #9c3f4c;
+        }
+
+    .fileTab.active .closeTab {
+        color: #657188;
+    }
+
+        .fileTab.active .closeTab:hover {
+            background: #dce2ec;
+            color: #9c3f4c;
+        }
+
+    .fileTab.dirty .tabTitle::after {
+        content: " *";
+    }
+
+    .fileTab.dragging {
+        opacity: 0.45;
+    }
+
+    .fileTab.dropBefore {
+        box-shadow: inset 3px 0 0 #66a0ff;
+    }
+
+    .fileTab.dropAfter {
+        box-shadow: inset -3px 0 0 #66a0ff;
+    }
+
+body.fileTabReordering, body.fileTabReordering * {
+    cursor: grabbing !important;
+    user-select: none !important;
+}
+
+.tabContextMenu {
+    position: absolute;
+    z-index: 10000;
+    background: #ffffff;
+    border: 1px solid #8bb5ff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 4px 0;
+    font-size: 12px;
+    color: #1d2430;
+    display: none;
+}
+
+    .tabContextMenu div {
+        padding: 6px 16px;
+        cursor: pointer;
+    }
+
+        .tabContextMenu div:hover {
+            background: #eef5ff;
+            color: #174d89;
+        }
+
+/* Cell Input Wrapper Container */
+.cell-input-wrap {
+    position: relative;
+    width: 100%;
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+
+/* Base Layout for Inputs and Backdrops */
+.inputGrid input,
+.cell-backdrop {
+    font-family: Consolas, "Courier New", monospace !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 20px !important;
+    letter-spacing: 0px !important;
+    padding: 3px 6px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    box-sizing: border-box !important;
+    text-align: right !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Reserve space for badge when cell is unfocused */
+.cell-input-wrap:not(:focus-within) input.has-badge,
+.cell-input-wrap:not(:focus-within) input.has-badge + .cell-backdrop {
+    padding-right: 85px !important;
+}
+
+/* Colorized Backdrop Layer */
+.cell-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    white-space: pre;
+    overflow: hidden;
+    pointer-events: none !important;
+    color: #1e293b !important;
+    display: none;
+    z-index: 1;
+}
+
+/* Highlighted CAD Layer Row when an Entity is Clicked */
+.cadLayer.layer-selected-highlight {
+    background: #dbe9ff !important;
+    border: 1px solid #2563d8 !important;
+    border-radius: 4px;
+    box-shadow: 0 0 6px rgba(37, 99, 235, 0.45);
+    transition: all 0.2s ease;
+}
+
+/* Highlighted CAD Entity Row in Entities Table */
+.cadEntityTable tr.entity-selected-highlight td {
+    background: #fef08a !important;
+    border-top: 1px solid #eab308 !important;
+    border-bottom: 1px solid #eab308 !important;
+}
+
+/* Hide hint text and Row/Column inputs in collapsed mode */
+.tableBlock:not(.expanded) .gridHint,
+.tableBlock:not(.expanded) .gridHeader label {
+    display: none !important;
+}
+
+/* In collapsed mode the cell format bar only appears while the table block is
+   the active (selected) control, so the report view stays clean. */
+.tableBlock:not(.expanded):not(.selected) .cellFormatBar {
+    display: none !important;
+}
+
+/* Transparent Native Input Text */
+.inputGrid input.formula-editing,
+.inputGrid input.show-backdrop {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    caret-color: #1e293b !important;
+    background: transparent !important;
+    position: relative;
+    z-index: 2;
+}
+
+    .inputGrid input.formula-editing::selection,
+    .inputGrid input.show-backdrop::selection {
+        background: rgba(180, 213, 254, 0.45) !important;
+        color: transparent !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    .inputGrid input.formula-editing + .cell-backdrop,
+    .inputGrid input.show-backdrop + .cell-backdrop {
+        display: block;
+    }
+
+/* Ensure grid headers align left in collapsed preview mode */
+.tableBlock:not(.expanded) .preview .gridEditor {
+    text-align: left;
+}
+
+/* Function Signature Tooltip */
+.function-tooltip {
+    position: fixed;
+    z-index: 2147483647;
+    background: #1e293b;
+    color: #f8fafc;
+    padding: 5px 9px;
+    border-radius: 4px;
+    font: 600 11px Consolas, monospace;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    border: 1px solid #475569;
+    pointer-events: none;
+    display: none;
+    white-space: nowrap;
+}
+
+    .function-tooltip .active-param {
+        color: #38bdf8;
+        text-decoration: underline;
+    }
+
+/* Cell Result Preview Badge */
+.cell-preview-badge {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font: 600 10px Consolas, monospace !important;
+    color: #1e40af;
+    background: #dbeafe;
+    padding: 1px 5px;
+    border-radius: 3px;
+    pointer-events: none !important;
+    white-space: nowrap;
+    max-width: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #93c5fd;
+    z-index: 5;
+    display: none;
+}
+
+    .cell-preview-badge.badge-error {
+        color: #991b1b;
+        background: #fee2e2;
+        border-color: #fca5a5;
+    }
+
+    .cell-preview-badge.badge-pending {
+        color: #92400e;
+        background: #fef3c7;
+        border-color: #fcd34d;
+    }
+
+/* Spinner shown while a table cell expression is still waiting for a TSD value.
+   Rendered in the editable grid cells (including auto-paged continuation chunks)
+   and in the read-only output tables. */
+.cellSpinner {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    width: 11px;
+    height: 11px;
+    margin-top: -5.5px;
+    border: 2px solid #cbd5e1;
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 6;
+    animation: cellSpin 0.7s linear infinite;
+}
+
+.matrixTable .cellSpinner {
+    position: static;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.cell-input-wrap.cellPending input,
+.cell-input-wrap.cellPending textarea.wrapCell {
+    padding-right: 20px;
+}
+
+@keyframes cellSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.cell-input-wrap:focus-within .cell-preview-badge,
+.cell-input-wrap input:focus ~ .cell-preview-badge {
+    display: none !important;
+}
+
+/* Fill Handle (Bottom-Right Corner) */
+.cell-fill-handle {
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
+    width: 7px;
+    height: 7px;
+    background: #2563d8;
+    border: 1px solid #ffffff;
+    cursor: crosshair;
+    z-index: 10;
+    display: none;
+}
+
+.cell-input-wrap:focus-within .cell-fill-handle,
+.cell-input-wrap input:focus ~ .cell-fill-handle {
+    display: block;
+}
+
+.inputGrid td input.cell-referenced {
+    cursor: move !important;
+}
+
+.inputGrid td input.cell-fill-target {
+    background-color: rgba(37, 99, 235, 0.2) !important;
+    outline: 2px dashed #2563d8 !important;
+}
+
+/* Table Boundary Insert Indicator Lines & Buttons */
+.grid-insert-indicator-h {
+    position: fixed;
+    z-index: 2147483646;
+    height: 3px;
+    background: #2563d8;
+    cursor: pointer;
+    pointer-events: auto;
+    display: none;
+    box-shadow: 0 0 4px rgba(37, 99, 235, 0.5);
+}
+
+    .grid-insert-indicator-h .insert-btn {
+        position: absolute;
+        left: -20px;
+        top: -8px;
+        width: 18px;
+        height: 18px;
+        background: #2563d8;
+        color: #ffffff;
+        border-radius: 50%;
+        font-family: "Segoe UI", sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        user-select: none;
+        transition: transform 0.1s ease;
+    }
+
+.grid-insert-indicator-v {
+    position: fixed;
+    z-index: 2147483646;
+    width: 3px;
+    background: #2563d8;
+    cursor: pointer;
+    pointer-events: auto;
+    display: none;
+    box-shadow: 0 0 4px rgba(37, 99, 235, 0.5);
+}
+
+    .grid-insert-indicator-v .insert-btn {
+        position: absolute;
+        top: -20px;
+        left: -8px;
+        width: 18px;
+        height: 18px;
+        background: #2563d8;
+        color: #ffffff;
+        border-radius: 50%;
+        font-family: "Segoe UI", sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        user-select: none;
+        transition: transform 0.1s ease;
+    }
+
+    .grid-insert-indicator-h:hover .insert-btn,
+    .grid-insert-indicator-v:hover .insert-btn {
+        transform: scale(1.18);
+    }
+
+/* Table Cell Context Menu */
+.grid-context-menu {
+    position: fixed;
+    z-index: 2147483647;
+    background: #ffffff;
+    border: 1px solid #8bb5ff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 4px 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 12px;
+    color: #1d2430;
+    display: none;
+    min-width: 150px;
+}
+
+    .grid-context-menu div {
+        padding: 6px 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        user-select: none;
+    }
+
+        .grid-context-menu div:hover {
+            background: #eef5ff;
+            color: #174d89;
+        }
+
+        .grid-context-menu div.danger {
+            color: #9c3f4c;
+        }
+
+            .grid-context-menu div.danger:hover {
+                background: #fee2e2;
+                color: #b42318;
+            }
+
+/* AI Sample Manager Modal & Panels */
+.aiSampleModal {
+    width: 680px !important;
+    max-width: 90vw;
+    z-index: 3000 !important;
+}
+
+.aiSampleTabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid #bdc5d4;
+    margin-bottom: 8px;
+}
+
+.aiSampleTab {
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    color: #52607a;
+    font: 600 11px Segoe UI, Arial, sans-serif;
+    cursor: pointer;
+}
+
+    .aiSampleTab.active {
+        background: #ffffff;
+        border-color: #bdc5d4;
+        color: #2563d8;
+    }
+
+.aiSamplePanel {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+}
+
+    .aiSamplePanel.active {
+        display: flex;
+    }
+
+.aiCodeTextarea {
+    width: 100%;
+    min-height: 260px;
+    max-height: 420px;
+    font: 11px Consolas, monospace;
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #475569;
+    border-radius: 4px;
+    padding: 8px;
+    resize: vertical;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+/* ---- User guide dialog ---- */
+.userGuideModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    background: rgba(15, 23, 42, 0.45);
+    align-items: center;
+    justify-content: center;
+}
+
+.userGuideDialog {
+    width: min(1000px, 92vw);
+    height: min(840px, 92vh);
+    background: #fff;
+    border: 1px solid #174d89;
+    border-radius: 6px;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.userGuideTitleBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 12px;
+    background: #1e3a5f;
+    color: #f1f5f9;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+    .userGuideTitleBar button {
+        background: none;
+        border: none;
+        color: #c0c9dc;
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+        .userGuideTitleBar button:hover {
+            color: #fff;
+        }
+
+#userGuideFrame {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: #f8fafc;
+}
+
+.aiActionRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Code Reference Text in Collapsed Calc Preview */
+.calcReferenceText {
+    display: inline;
+    margin-left: 12px;
+    opacity: 0.85;
+    white-space: nowrap;
+    user-select: none;
+}
+
+/* Inline Calculation Unit Container */
+.inline-calc-unit {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 3px;
+    padding: 0 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #174d89;
+    background: #dbe9ff;
+    border: 1px solid #93c5fd;
+    border-radius: 3px;
+    user-select: none;
+    vertical-align: baseline;
+}
+
+.inline-calc.collapsed .inline-calc-unit {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: #2563d8;
+    margin-left: 2px;
+}
+
+.inline-calc-unit:empty {
+    display: none;
+}
+
+/* Standalone Calc Block Unit Container */
+.calc-unit-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 1px 6px;
+    margin-left: 6px;
+    background: #eef5ff;
+    border: 1px dashed #8bb5ff;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.9em;
+    color: #174d89;
+    vertical-align: middle;
+}
+
+    .calc-unit-container .previewUnitInput {
+        border: none !important;
+        background: transparent !important;
+        color: #174d89 !important;
+        font-weight: 600 !important;
+        font-size: inherit !important;
+        outline: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        cursor: text;
+    }
+
+    .calc-unit-container:hover {
+        border-color: #2563d8;
+        background: #dbe9ff;
+    }
+
+/* Unit Container Badge for Units in Expressions */
+.expr-unit {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 4px;
+    margin-left: 2px;
+    font-family: Segoe UI, Arial, sans-serif;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #174d89;
+    background: #eef5ff;
+    border: 1px solid #8bb5ff;
+    border-radius: 3px;
+    user-select: none;
+    vertical-align: baseline;
+    line-height: 1.2;
+}
+
+/* Single Scroll Container for Table Results */
+.tablePreviewResult {
+    width: 100%;
+    max-width: 100%;
+    overflow: visible !important;
+    margin-top: 4px;
+}
+
+/* AUTO-PAGE & SINGLE-BLOCK TABLE HEIGHT CONSTRAINTS */
+.tableBlock .preview,
+.tableBlock .tablePreviewResult {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Auto-Extended & Page Chunk Overrides */
+.tableBlock.autoExtendTable:not(.expanded),
+.tableBlock.isTableChunk:not(.expanded) {
+    height: var(--block-height) !important;
+    overflow: hidden !important;
+}
+
+    .tableBlock.autoExtendTable:not(.expanded) .preview,
+    .tableBlock.isTableChunk:not(.expanded) .preview,
+    .tableBlock.autoExtendTable:not(.expanded) .tablePreviewResult,
+    .tableBlock.isTableChunk:not(.expanded) .tablePreviewResult {
+        max-height: none !important;
+        height: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .tableBlock.autoExtendTable:not(.expanded) .matrixFrame,
+    .tableBlock.isTableChunk:not(.expanded) .matrixFrame {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        height: 100% !important;
+        max-height: 100% !important;
+    }
+
+/* Auto-Wrap chunks are sized from measured content. Allow a small overshoot instead of
+   hard-clipping, so the last wrapped row of a chunk is never cut in half. */
+.tableBlock.autoWrapTable.autoExtendTable:not(.expanded),
+.tableBlock.autoWrapTable.isTableChunk:not(.expanded) {
+    height: auto !important;
+    min-height: var(--block-height) !important;
+    overflow: visible !important;
+}
+
+    .tableBlock.autoWrapTable.autoExtendTable:not(.expanded) .preview,
+    .tableBlock.autoWrapTable.isTableChunk:not(.expanded) .preview,
+    .tableBlock.autoWrapTable.autoExtendTable:not(.expanded) .tablePreviewResult,
+    .tableBlock.autoWrapTable.isTableChunk:not(.expanded) .tablePreviewResult {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+/* Custom Visible Scrollbar Styling */
+.matrixFrame::-webkit-scrollbar {
+    height: 9px;
+    width: 9px;
+}
+
+.matrixFrame::-webkit-scrollbar-thumb {
+    background: #a0aec0;
+    border-radius: 4px;
+}
+
+    .matrixFrame::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+    }
+
+.matrixFrame::-webkit-scrollbar-track {
+    background: #edf2f7;
+    border-radius: 4px;
+}
+
+/* Single-Block Tables (Auto-Page OFF): Contain within block height & enable internal vertical scroll */
+.tableBlock:not(.autoExtendTable):not(.isTableChunk) .preview {
+    height: 100% !important;
+    max-height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+}
+
+.tableBlock:not(.autoExtendTable):not(.isTableChunk) .matrixWithUnit {
+    flex: 1 1 auto !important;
+    height: calc(100% - 28px) !important;
+    max-height: calc(100% - 28px) !important;
+    min-height: 0 !important;
+}
+
+.tableBlock:not(.autoExtendTable):not(.isTableChunk) .matrixFrame {
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+}
+
+.tableBlock:not(.autoExtendTable):not(.isTableChunk) .matrixTable thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #e9edf4 !important;
+    box-shadow: 0 1px 0 #cbd2df;
+}
+
+/* ==========================================================================
+   AUTO-WRAP TABLE STYLING
+   ========================================================================== */
+
+/* 1. Prevent Horizontal Overflow and Force Fixed Column Table Layout */
+.tableBlock.autoWrapTable .matrixFrame {
+    overflow-x: hidden !important; /* Hides horizontal scrollbar when auto-wrap is active */
+}
+
+    /* When Auto-Wrap and Auto-Page work together the chunk is already sized to the
+       measured rows, so the frame must not clip or scroll them away. */
+    .tableBlock.autoWrapTable.autoExtendTable .matrixFrame,
+    .tableBlock.autoWrapTable.isTableChunk .matrixFrame {
+        max-height: none !important;
+        height: auto !important;
+        overflow-y: visible !important;
+    }
+
+    /* Same for the editable grid used by display tables. */
+    .tableBlock.autoWrapTable .gridEditor.autoWrapGrid .gridScroll,
+    .tableBlock.autoWrapTable .preview .gridEditor.autoWrapGrid .gridScroll {
+        max-height: none !important;
+        height: auto !important;
+        overflow-y: visible !important;
+    }
+
+.tableBlock.autoWrapTable .matrixTable,
+.matrixTable.autoWrapTable {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    table-layout: fixed !important; /* Forces cells to adapt to block width */
+}
+
+    /* 2. Enable Cell Text Wrapping and Word Breaking */
+    .tableBlock.autoWrapTable .matrixTable th,
+    .tableBlock.autoWrapTable .matrixTable td,
+    .matrixTable.autoWrapTable th,
+    .matrixTable.autoWrapTable td {
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+        height: auto !important;
+        max-height: none !important;
+        line-height: 1.35 !important;
+        vertical-align: top !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+
+    /* Rows must grow with their tallest wrapped cell */
+    .tableBlock.autoWrapTable .matrixTable tr,
+    .matrixTable.autoWrapTable tr {
+        height: auto !important;
+        max-height: none !important;
+    }
+
+/* 3. Input grid (editable table) follows the same Auto-Wrap / Auto-Page modes */
+.gridEditor.autoWrapGrid .gridScroll {
+    overflow-x: hidden;
+}
+
+.gridEditor.autoWrapGrid .inputGrid {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+}
+
+    .gridEditor.autoWrapGrid .inputGrid td {
+        min-width: 0;
+        vertical-align: top;
+    }
+
+/* Auto-Wrap replaces the single-line input with a textarea so cell text can flow onto
+   several lines; the cell and row then grow with it. */
+.inputGrid textarea.wrapCell,
+.body .inputGrid textarea.wrapCell {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 20px;
+    max-height: none;
+    resize: none;
+    overflow: hidden;
+    border: 0;
+    padding: 4px 6px;
+    background: transparent;
+    font: 12px Consolas, monospace;
+    line-height: 1.35;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+    .inputGrid textarea.wrapCell:focus {
+        outline: 2px solid #2563d8;
+        outline-offset: -2px;
+        background: #eef5ff;
+    }
+
+.gridEditor.autoWrapGrid .body .inputGrid input,
+.gridEditor.autoWrapGrid .inputGrid input {
+    min-width: 0;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+/* Auto-Wrap: the wrapper (and therefore the row) must grow with the wrapped textarea instead
+   of staying at the fixed single-line height. */
+.gridEditor.autoWrapGrid .cell-input-wrap {
+    height: auto;
+    min-height: 20px;
+    align-items: stretch;
+}
+
+.gridEditor.autoWrapGrid .inputGrid tr,
+.gridEditor.autoWrapGrid .inputGrid td,
+.gridEditor.autoWrapGrid .inputGrid th {
+    height: auto;
+    max-height: none;
+}
+
+.gridPager {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+    font: 11px Segoe UI, Arial, sans-serif;
+    color: #52607a;
+}
+
+    .gridPager button {
+        padding: 2px 8px;
+        font-size: 11px;
+    }
+
+/* Align overlay buttons to the left edge below the top header banner in uncollapsed mode */
+.tableBlock.expanded .tablePreviewOverlay {
+    top: 28px !important;
+    left: auto !important;
+    right: 8px !important;
+}
+
+/* Prevent handle banner from overlapping inner controls in expanded mode */
+.block.expanded .body {
+    padding-top: 28px;
+}
+
+/* Provide extra clearance in expanded Table blocks for both the header banner and overlay buttons */
+.tableBlock.expanded .body {
+    padding-top: 58px;
+}
+
+/* ==========================================================================
+   MATRIX & VECTOR SQUARE BRACKET STYLING
+   ========================================================================== */
+
+/* 1. Base Container Padding for Brackets */
+.matrixFrame:not(.noBrackets) {
+    position: relative !important;
+    padding: 2px 8px !important; /* Space between bracket lines and table cells */
+}
+
+    /* 2. Left [ and Right ] Bracket Pseudo-Elements */
+    .matrixFrame:not(.noBrackets)::before,
+    .matrixFrame:not(.noBrackets)::after {
+        content: "" !important;
+        position: absolute !important;
+        top: 2px !important;
+        bottom: 2px !important;
+        width: 6px !important;
+        border: 2px solid currentColor !important;
+        pointer-events: none !important;
+        z-index: 12 !important;
+    }
+
+    /* Left Bracket [ */
+    .matrixFrame:not(.noBrackets)::before {
+        left: 1px !important;
+        border-right: none !important;
+        border-radius: 3px 0 0 3px !important;
+    }
+
+    /* Right Bracket ] */
+    .matrixFrame:not(.noBrackets)::after {
+        right: 1px !important;
+        border-left: none !important;
+        border-radius: 0 3px 3px 0 !important;
+    }
+
+/* 3. Hide Brackets for Report Tables or Tables with Headers */
+.matrixFrame.noBrackets::before,
+.matrixFrame.noBrackets::after {
+    display: none !important;
+    content: none !important;
+}
+
+</style >
