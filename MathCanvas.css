@@ -6558,6 +6558,159 @@ body.hide-table-formatting .table-format-controls {
     background: linear-gradient(135deg, transparent 50%, #94a3b8 50%);
 }
 
+/* Enable flex wrapping on active Home, Insert & Collaboration ribbon panels */
+#ribbon-panel-home.active,
+#ribbon-panel-insert.active,
+#ribbon-panel-collaboration.active {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 8px;
+    padding: 4px 8px;
+}
+
+/* 2-Row Grid for Ribbon Groups */
+#ribbon-panel-home .ribbonGroup,
+#ribbon-panel-insert .ribbonGroup,
+#ribbon-panel-collaboration .ribbonGroup {
+    display: inline-grid;
+    grid-template-rows: repeat(2, 26px);
+    grid-auto-flow: column;
+    gap: 3px 6px;
+    align-items: center;
+    padding: 6px 10px 22px 10px;
+    border-right: 1px solid var(--border-color, #cbd5e1);
+}
+
+    /* Compact Control Sizing */
+    #ribbon-panel-home .ribbonGroup button,
+    #ribbon-panel-home .ribbonGroup select,
+    #ribbon-panel-home .ribbonGroup input[type="text"],
+    #ribbon-panel-home .ribbonGroup label,
+    #ribbon-panel-insert .ribbonGroup button,
+    #ribbon-panel-insert .ribbonGroup select,
+    #ribbon-panel-insert .ribbonGroup input[type="text"],
+    #ribbon-panel-insert .ribbonGroup label,
+    #ribbon-panel-collaboration .ribbonGroup button,
+    #ribbon-panel-collaboration .ribbonGroup select,
+    #ribbon-panel-collaboration .ribbonGroup input[type="text"],
+    #ribbon-panel-collaboration .ribbonGroup label {
+        height: 24px !important;
+        min-height: 24px !important;
+        font-size: 11.5px !important;
+        font-weight: 500;
+        white-space: nowrap;
+        display: inline-flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 2px 8px !important;
+        gap: 5px !important;
+    }
+
+/* Modal Overlay - Placed at Viewport Top */
+#p2pModal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99999 !important;
+    background: rgba(15, 23, 42, 0.6) !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.p2pModalCard {
+    background: #ffffff !important;
+    color: #1e293b !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    width: 360px !important;
+    max-width: 90vw !important;
+    padding: 16px !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3) !important;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Remote Cursors */
+.remoteCursor {
+    position: absolute;
+    z-index: 99998;
+    pointer-events: none;
+    transform: translate(-2px, -2px);
+    transition: left 0.04s linear, top 0.04s linear;
+}
+
+    .remoteCursor .cursorPointer {
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 12px solid #2563d8;
+        transform: rotate(-35deg);
+        filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+    }
+
+    .remoteCursor .cursorTag {
+        position: absolute;
+        left: 12px;
+        top: 8px;
+        background: #2563d8;
+        color: #ffffff;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        white-space: nowrap;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .remoteCursor .cursorTabBadge {
+        background: rgba(255, 255, 255, 0.25);
+        padding: 0 4px;
+        border-radius: 3px;
+        font-size: 9px;
+        font-weight: 600;
+    }
+
+    .remoteCursor.offTab {
+        top: 8px !important;
+        left: 50% !important;
+        transform: translateX(-50%);
+        opacity: 0.85;
+    }
+
+        .remoteCursor.offTab .cursorPointer {
+            display: none;
+        }
+
+/* Hide close button on shared tabs for non-host users */
+.fileTab.peer-shared-tab .closeTab {
+    display: none !important;
+}
+
+/* Top-Left Corner Resize Handle */
+.resizeHandleTL {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    z-index: 6;
+    cursor: nwse-resize;
+    background: linear-gradient(135deg, #2563d8 0% 45%, transparent 46% 56%, #2563d8 57% 67%, transparent 68%);
+}
+
+.block.selected .resizeHandleTL {
+    display: block;
+}
+
 /* Hide AI Assistant group in Insert ribbon tab */
 .ribbonGroup[data-group-label="AI Assistant"] {
     display: none !important;
